@@ -1,0 +1,15 @@
+:root {
+  --color-white: #FFF;
+}
+
+.light {
+  --bg-primary: var(--color-white);
+}
+
+.dark {
+  --bg-primary: #10141c;
+}
+
+.text-primary {
+  @apply text-black dark:text-white
+}

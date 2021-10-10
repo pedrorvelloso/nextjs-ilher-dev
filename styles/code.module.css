@@ -1,0 +1,16 @@
+.code {
+  @apply w-full
+}
+
+.code > pre {
+  @apply h-auto lg:h-code
+}
+
+.code > pre::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.code > pre::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-sm
+}
