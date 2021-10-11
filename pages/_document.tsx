@@ -6,25 +6,12 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link
-            rel="preload"
-            href="/fonts/Nunito-SemiBold.ttf"
-            as="font"
-            type="font/ttf"
-            crossOrigin="anonymous"
+            href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap"
+            rel="stylesheet"
           />
           <link
-            rel="preload"
-            href="/fonts/Nunito-Regular.ttf"
-            as="font"
-            type="font/ttf"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/JetBrainsMono-Regular.ttf"
-            as="font"
-            type="font/ttf"
-            crossOrigin="anonymous"
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+            rel="stylesheet"
           />
         </Head>
         <body>
