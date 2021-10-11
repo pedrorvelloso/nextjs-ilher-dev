@@ -1,5 +1,5 @@
 import Anchor from '@/components/anchor'
-import Paragrahp from '@/components/paragraph'
+import Paragraph from '@/components/paragraph'
 import { H1, H3 } from '@/components/heading'
 import SocialLinkCard from '@/components/social-link-card'
 import Section from '@/components/section'
@@ -13,10 +13,10 @@ function AboutMeSection() {
         <div className="max-w-2xl">
           <H3>Heeeeey, listen! 🧚 </H3>
           <H1>Hi, I&apos;m Pedro!</H1>
-          <Paragrahp>
+          <Paragraph>
             My name is Pedro Reis. I work as a Full Stack developer.
-          </Paragrahp>
-          <Paragrahp>
+          </Paragraph>
+          <Paragraph>
             Currently, I&apos;m working at an amazing place called{' '}
             <Anchor
               href="https://southsystem.com.br/en/home/"
@@ -25,8 +25,8 @@ function AboutMeSection() {
               South System
             </Anchor>{' '}
             with an incredible team.
-          </Paragrahp>
-          <Paragrahp>
+          </Paragraph>
+          <Paragraph>
             I also love retro gaming and live streaming at Twitch! I usually do
             The Legend of Zelda: Ocarina of time speedruns at my channel. If you
             want to follow me make sure to click{' '}
@@ -37,7 +37,18 @@ function AboutMeSection() {
               this link
             </Anchor>{' '}
             😄.
-          </Paragrahp>
+          </Paragraph>
+          <Paragraph>
+            Although I’m not currently looking for any new opportunities, my
+            inbox is always open.{' '}
+            <Anchor
+              href="mailto:pedro@ilher.dev"
+              className="text-gray-600 dark:text-gray-400"
+            >
+              Click here
+            </Anchor>{' '}
+            and send me an email!
+          </Paragraph>
         </div>
         <div className="max-w-full">
           <H3>Stay tuned with my socials!</H3>

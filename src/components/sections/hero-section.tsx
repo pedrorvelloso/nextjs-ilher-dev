@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Section from '@/components/section'
-import { H1 } from '@/components/heading'
+import { H1, H2 } from '@/components/heading'
 
 function HeroSection() {
   return (
@@ -16,10 +16,10 @@ function HeroSection() {
         />
       </div>
       <H1 className="leading-tight text-center">Full stacker developer</H1>
-      <h2 className="text-gray-600 dark:text-gray-400 text-lg lg:text-xl text-center">
+      <H2 className="text-center">
         Hey, I’m Pedro Reis. Software developer focused on delivering amazing
         experiences.
-      </h2>
+      </H2>
     </Section>
   )
 }

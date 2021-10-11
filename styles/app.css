@@ -13,3 +13,7 @@
 .text-primary {
   @apply text-black dark:text-white
 }
+
+.section {
+  @apply mx-10vw lg:mx-auto max-w-screen-xl px-0 lg:px-12
+}

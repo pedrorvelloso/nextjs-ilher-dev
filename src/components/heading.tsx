@@ -24,7 +24,7 @@ function H2({ className, children }: HeadingProps) {
     <h2
       className={clsx(
         className,
-        'text-gray-600 dark:text-gray-400 text-lg lg:text-xl text-center',
+        'text-gray-600 dark:text-gray-400 text-lg lg:text-xl',
       )}
     >
       {children}

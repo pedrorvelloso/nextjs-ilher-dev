@@ -7,16 +7,7 @@ interface SectionProps extends WithChildren {
 }
 
 function Section({ className, children }: SectionProps) {
-  return (
-    <section
-      className={clsx(
-        className,
-        'mx-10vw lg:mx-auto max-w-screen-xl px-0 lg:px-12',
-      )}
-    >
-      {children}
-    </section>
-  )
+  return <section className={clsx(className, 'section')}>{children}</section>
 }
 
 export default Section

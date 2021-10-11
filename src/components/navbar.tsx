@@ -3,8 +3,8 @@ import { useTheme } from 'next-themes'
 import { FaMoon as MoonIcon, FaSun as SunIcon } from 'react-icons/fa'
 import clsx from 'clsx'
 
-import Button from '@/components/button'
 import { H1 } from '@/components/heading'
+import Anchor from '@/components/anchor'
 
 function ThemeChanger() {
   const [mounted, setMounted] = useState(false)
@@ -58,7 +58,13 @@ function Navbar() {
         <div className="flex items-center">
           <ThemeChanger />
           <span className="hidden ml-6 lg:block">
-            <Button variant="contained">Let&apos;s chat!</Button>
+            <Anchor
+              href="mailto:pedro@ilher.dev"
+              underline={false}
+              className="no-underline bg-color-section text-white hover:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white transition-all px-6 py-2 rounded-full text-md"
+            >
+              Let&apos;s chat
+            </Anchor>
           </span>
         </div>
       </nav>
