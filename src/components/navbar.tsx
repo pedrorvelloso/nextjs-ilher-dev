@@ -25,7 +25,7 @@ function ThemeChanger() {
       <div className="relative w-8 h-8">
         <span
           className={clsx(
-            'absolute inset-0 text-black dark:text-white transform transition duration-1000 flex justify-center items-center',
+            'absolute inset-0 text-black dark:text-white transform transition duration-500 flex justify-center items-center',
             {
               'opacity-0': theme === 'light',
               'opacity-1': theme === 'dark',
@@ -36,7 +36,7 @@ function ThemeChanger() {
         </span>
         <span
           className={clsx(
-            'absolute inset-0 text-black dark:text-white transform transition duration-1000 flex justify-center items-center',
+            'absolute inset-0 text-black dark:text-white transform transition duration-500 flex justify-center items-center',
             {
               'opacity-0': theme === 'dark',
               'opacity-1': theme === 'light',

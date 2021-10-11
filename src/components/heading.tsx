@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import clsx from 'clsx'
 
 import { WithChildren } from '@/models/app'
@@ -6,31 +7,41 @@ interface HeadingProps extends WithChildren {
   className?: string
 }
 
-function H1({ className, children }: HeadingProps) {
-  return (
-    <h1
-      className={clsx(
-        className,
-        'text-2xl lg:text-4xl text-gray-800 dark:text-white font-bold mb-4',
-      )}
-    >
-      {children}
-    </h1>
-  )
-}
+const H1 = forwardRef<HTMLHeadingElement, HeadingProps>(
+  ({ className, children }, ref) => {
+    return (
+      <h1
+        ref={ref}
+        className={clsx(
+          className,
+          'text-2xl lg:text-4xl text-gray-800 dark:text-white font-bold mb-4',
+        )}
+      >
+        {children}
+      </h1>
+    )
+  },
+)
 
-function H2({ className, children }: HeadingProps) {
-  return (
-    <h2
-      className={clsx(
-        className,
-        'text-gray-600 dark:text-gray-400 text-lg lg:text-xl',
-      )}
-    >
-      {children}
-    </h2>
-  )
-}
+H1.displayName = 'H1'
+
+const H2 = forwardRef<HTMLHeadingElement, HeadingProps>(
+  ({ className, children }, ref) => {
+    return (
+      <h2
+        ref={ref}
+        className={clsx(
+          className,
+          'text-gray-600 dark:text-gray-400 text-lg lg:text-xl',
+        )}
+      >
+        {children}
+      </h2>
+    )
+  },
+)
+
+H2.displayName = 'H2'
 
 function H3({ className, children }: HeadingProps) {
   return (
