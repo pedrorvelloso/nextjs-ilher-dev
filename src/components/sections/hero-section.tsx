@@ -1,11 +1,26 @@
 import Image from 'next/image'
+import { motion } from 'framer-motion'
+
 import Section from '@/components/section'
-import { H1 } from '@/components/heading'
+import { H1 as Heading1, H2 as Heading2 } from '@/components/heading'
+
+const H1 = motion(Heading1)
+const H2 = motion(Heading2)
+
+const childVariants = {
+  initial: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+}
 
 function HeroSection() {
   return (
     <Section className="h-hero-sm lg:h-hero flex items-center justify-center flex-col">
-      <div className="bg-gray-800 dark:bg-gray-200 rounded-full p-1 flex justify-center items-center mb-4 avatar-small lg:avatar-big">
+      <motion.div
+        initial={{ scale: 1.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.75 }}
+        className="bg-gray-800 dark:bg-gray-200 rounded-full p-1 flex justify-center items-center mb-4 avatar-small lg:avatar-big"
+      >
         <Image
           src="/imgs/avatar.jpeg"
           width="226"
@@ -14,12 +29,26 @@ function HeroSection() {
           alt="Pedro Reis"
           className="rounded-full"
         />
-      </div>
-      <H1 className="leading-tight text-center">Full stacker developer</H1>
-      <h2 className="text-gray-600 dark:text-gray-400 text-lg lg:text-xl text-center">
-        Hey, I’m Pedro Reis. Software developer focused on delivering amazing
-        experiences.
-      </h2>
+      </motion.div>
+      <motion.div
+        initial="initial"
+        animate="visible"
+        variants={{
+          initial: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.5, delayChildren: 0.65 },
+          },
+        }}
+      >
+        <H1 variants={childVariants} className="leading-tight text-center">
+          Full stacker developer
+        </H1>
+        <H2 variants={childVariants} className="text-center">
+          Hey, I’m Pedro Reis. Software developer focused on delivering amazing
+          experiences.
+        </H2>
+      </motion.div>
     </Section>
   )
 }
