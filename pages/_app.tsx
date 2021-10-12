@@ -1,7 +1,6 @@
 import '@/styles/app.css'
 import '@/styles/tailwind.css'
 import '@/styles/global.css'
-import '@/styles/no-script.css'
 
 import { ThemeProvider } from 'next-themes'
 
