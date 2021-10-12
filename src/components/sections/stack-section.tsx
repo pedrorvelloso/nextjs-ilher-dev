@@ -3,7 +3,7 @@ import Section from '@/components/section'
 
 const frontendStack = `{
   "languages": [
-    "javscript",
+    "javascript",
     "typescript"
   ],
   "libsAndFrameworks": [
