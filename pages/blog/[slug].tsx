@@ -32,7 +32,7 @@ const components = {
     <Paragraph bigger={false} className="px-0 lg:px-12" {...props} />
   ),
   h1: (props) => <H1 className="px-0 lg:px-12" {...props} />,
-  h2: (props) => <H2 className="px-0 lg:px-12" {...props} />,
+  h2: (props) => <H2 className="px-0 lg:px-12 mb-3" {...props} />,
   h3: (props) => <H3 className="px-0 lg:px-12" {...props} />,
   a: (props) => <Anchor className="text-color-section" {...props} />,
 }

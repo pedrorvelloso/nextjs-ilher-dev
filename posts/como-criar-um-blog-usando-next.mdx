@@ -7,5 +7,54 @@ bannerUrl: https://res.cloudinary.com/ilher-dev/image/upload/c_fit,h_600,o_100/v
 bannerAlt: Sunset
 bannerCredit: Photo by [Johannes Plenio](https://unsplash.com/photos/qkfxBc2NQ18)
 ---
-Primeiramente sejam todos muito bem vindos! Esse será o primeiro post desse meu blog, em português, completamente servido pela ```Vercel```!
+Primeiramente sejam todos muito bem vindos! Esse será o primeiro post desse meu blog, em português, completamente servido pela [Vercel](https://vercel.com/)!
 
+Vamos colocar a mão na massa e construir um blog super simples, mas com funcionalidades super utéis para te integrar ainda mais no universo do NextJS. Além disso utilizaremos o [TailwindCSS](https://tailwindcss.com/) para dar uma *tunada* em nossa aplicação.
+
+Para começar, iremos iniciar um projeto `Next` via cli. Neste exemplo utilizarei o `yarn`:
+
+```sh
+yarn create next-app my-blog
+```
+
+Após o projeto ser iniciado, iremos adicionar as dependências necessárias para nosso projeto:
+
+```sh
+yarn add next-mdx-remote tailwindcss@latest postcss@latest autoprefixer@latest -D
+```
+
+## O que é MDX?
+MDX é um formato que deixa a gente importar códigos JSX dentro de nosso arquivo *Markdown*. Com isso, escrever contéudos fica mais fácil, além de ser possível utilizar componentes específicos do React para melhorar ainda mais a visualização.
+
+Para lidarmos com MDX estaremos utilizando o pacote [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote).
+
+## E o TailwindCSS?
+TailwindCSS é um framework CSS mega completo para gerenciarmos a estilização da nossa página.
+
+Para continuarmos com nossa aplicação, é necessário iniciar o Tailwind na raiz do nosso projeto:
+
+```sh
+npx tailwindcss init -p
+```
+
+Após isso, os arquivos `tailwind.config.js` e `postcss.config.js` serão criados na raíz do nosso projeto. Agora, iremos instalar o plugin do Tailwind que irá prover estilização pronta para nosso *Markdown*:
+
+```sh
+yarn add @tailwindcss/typography
+```
+
+Após instalado, adicione o requerimento do plugin no arquivo `tailwind.config.js`
+
+```js filename=tailwind.config.js lines=6
+module.exports = {
+  theme: {
+    // ...
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    // ...
+  ],
+}
+```
+
+Pronto, estamos prontos para começar a codar!
