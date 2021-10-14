@@ -56,7 +56,7 @@ function Navbar() {
         <Anchor
           href="/"
           underline
-          className="dark:text-white text-2xl font-bold mt-1"
+          className="dark:text-white text-2xl lg:text-4xl font-bold"
         >
           Pedro Reis
         </Anchor>
