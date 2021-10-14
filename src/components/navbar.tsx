@@ -3,7 +3,6 @@ import { useTheme } from 'next-themes'
 import { FaMoon as MoonIcon, FaSun as SunIcon } from 'react-icons/fa'
 import clsx from 'clsx'
 
-import { H1 } from '@/components/heading'
 import Anchor from '@/components/anchor'
 
 function ThemeChanger() {
@@ -54,7 +53,13 @@ function Navbar() {
   return (
     <div className="px-5vw py-4 lg:py-12">
       <nav className="text-primary max-w-8xl flex justify-between items-center mx-auto">
-        <H1 className="mb-0">Pedro Reis</H1>
+        <Anchor
+          href="/"
+          underline
+          className="dark:text-white text-2xl font-bold mt-1"
+        >
+          Pedro Reis
+        </Anchor>
         <div className="flex items-center">
           <ThemeChanger />
           <span className="hidden ml-6 lg:block">

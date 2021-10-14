@@ -1,7 +1,6 @@
 export default {
   'code[class*="language-"]': {
     color: '#f8f8f2',
-    background: 'none',
     textShadow: '0 1px rgba(0, 0, 0, 0.3)',
     fontFamily: "'JetBrains Mono', monospace",
     textAlign: 'left',
@@ -37,9 +36,8 @@ export default {
     msHyphens: 'none',
     hyphens: 'none',
     padding: '1em',
-    margin: '.5em 0',
     overflow: 'auto',
-    borderRadius: '0.3em',
+    borderRadius: '6px',
   },
   ':not(pre) > code[class*="language-"]': {
     background: '#10141c',

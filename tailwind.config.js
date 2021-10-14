@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require('tailwindcss/defaultTheme')
 
@@ -56,6 +57,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  // eslint-disable-next-line global-require
   plugins: [require('@tailwindcss/aspect-ratio')],
 }

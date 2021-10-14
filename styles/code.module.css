@@ -1,9 +1,13 @@
 .code {
-  @apply w-full
+  @apply w-full rounded-md
+}
+
+.code-auto {
+  @apply h-auto w-full rounded-md
 }
 
 .code > pre {
-  @apply h-auto lg:h-code
+  @apply h-auto lg:h-code rounded-md
 }
 
 .code > pre::-webkit-scrollbar {

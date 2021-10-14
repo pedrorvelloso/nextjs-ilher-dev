@@ -1,26 +1,38 @@
 import PostPreview from '@/components/post-preview'
+import { H1 } from '@/components/heading'
+import Section from '@/components/section'
 
-const imageLink =
-  'https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80'
+import { HomePost } from '@/models/blog'
+import { formatDate } from '@/utils/dates'
 
-function BlogSection() {
+interface BlogSectionProps {
+  posts: Array<HomePost>
+}
+
+function BlogSection({ posts }: BlogSectionProps) {
   return (
-    <div className="relative">
-      <div className="mx-10vw py-12 backdrop-blur-sm">
-        <h1 className="text-2xl dark:text-white font-bold">Blog</h1>
-        <div className="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6 mt-6">
-          <PostPreview
-            title="soon"
-            description="coming soon..."
-            image={{
-              url: imageLink,
-              author: 'James Harrison',
-              unsplashUrl: 'https://unsplash.com/photos/vpOeXr5wmR4',
-            }}
-          />
+    <Section className="pb-12">
+      <div className="relative">
+        <div className="backdrop-blur-sm">
+          <H1>Blog</H1>
+          <div className="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6 mt-6">
+            {posts.map((post) => (
+              <PostPreview
+                key={post.title}
+                url={post.url}
+                title={`${post.title} sdfajsdfiajsd dsijfoa isdj foiasdj f`}
+                description={`${formatDate(post.date)} - ${post.readTime}`}
+                image={{
+                  url: post.bannerUrl,
+                  alt: post.bannerCredit,
+                  credit: post.bannerCredit,
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Section>
   )
 }
 
