@@ -20,7 +20,7 @@ function BlogSection({ posts }: BlogSectionProps) {
               <PostPreview
                 key={post.title}
                 url={post.url}
-                title={`${post.title} sdfajsdfiajsd dsijfoa isdj foiasdj f`}
+                title={post.title}
                 description={`${formatDate(post.date)} - ${post.readTime}`}
                 image={{
                   url: post.bannerUrl,
