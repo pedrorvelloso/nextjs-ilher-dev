@@ -1,0 +1,45 @@
+.post > * {
+  @apply px-0 lg:px-12
+}
+
+.post p,
+.post ul {
+  @apply text-lg
+}
+
+.post p {
+ @apply mb-5
+}
+
+.post pre {
+  @apply lg:px-0
+}
+
+.post ul {
+  @apply mx-5 lg:mx-10 mb-5 list-disc
+}
+
+.post ul li > code,
+.post p > code  {
+  @apply text-yellow-600 dark:text-yellow-500 font-bold text-sm
+}
+
+.post ul li > code:after,
+.post p > code:after  {
+  content: '`'
+}
+
+.post ul li > code:before,
+.post p > code:before  {
+  content: '`'
+}
+
+.post blockquote p {
+  @apply bg-gray-400 bg-opacity-30 text-xl px-6 py-3 lg:py-6 lg:px-12 relative rounded-md
+}
+
+.post blockquote p:after {
+  content: '';
+  border-width: 4px;
+  @apply absolute top-0 bottom-0 left-0 border-gray-500 rounded-tl-md rounded-bl-md
+}

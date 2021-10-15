@@ -2,7 +2,7 @@
 title: Como criar um blog usando Next + MDX
 description: O jeito mais simples para hospedar suas postagens!
 language: 🇧🇷
-date: "2020-10-14"
+date: "2021-10-14"
 bannerUrl: https://res.cloudinary.com/ilher-dev/image/upload/c_fit,h_600,o_100/v1634158318/johannes-plenio-qkfxBc2NQ18-unsplash_qi0bui.webp
 bannerAlt: Sunset
 bannerCredit: Photo by [Johannes Plenio](https://unsplash.com/photos/qkfxBc2NQ18)
@@ -20,7 +20,7 @@ yarn create next-app my-blog
 Após o projeto ser iniciado, iremos adicionar as dependências necessárias para nosso projeto:
 
 ```sh
-yarn add next-mdx-remote tailwindcss@latest postcss@latest autoprefixer@latest -D
+yarn add next-mdx-remote gray-matter tailwindcss@latest postcss@latest autoprefixer@latest -D
 ```
 
 ## O que é MDX?
@@ -57,4 +57,245 @@ module.exports = {
 }
 ```
 
+Agora precisamos fazer a configuração necessária para que o Tailwind faça o *tree-shake* de estilos não utilizados nas *builds* de produção:
+
+```diff
+module.exports = {
+-  purge: [],
++  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
+}
+```
+*O Tailwind vem com muitas classes CSS de apoio para construção do layout. Em produção, queremos garantir que só classes que utilizamos estejam disponivéis.*
+
+
+Agora, importaremos no arquivo `pages/_app.js` o arquivo CSS do Tailwind.
+
+```diff filename=pages/_app.js
+- import '../styles/globals.css'
++ import 'tailwindcss/tailwind.css'
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+```
+
 Pronto, estamos prontos para começar a codar!
+
+## Dando uma carinha legal para nossa página inicial
+
+Vamos começar a usar o Tailwind para dar uma cara pra página inicial. A idéia é ter uma página com o título do nosso site e com cards para exibirmos nossas postagens.
+
+Iremos componentizar esse `Card` e alterar nossa página inicial para usar Tailwind:
+
+```jsx filename=components/Card.js
+import Link from 'next/link'
+
+function Card({ title, description, href }) {
+  return (
+    <Link href={href} passHref>
+      <a className="m-4 p-5 text-left no-underline border border-gray-500 rounded-xl transition-colors hover:text-blue-700 hover:border-blue-700">
+        <h2 className="text-2xl">{title} &rarr;</h2>
+        <p>{description}</p>
+      </a>
+    </Link>
+  )
+}
+
+export default Card
+```
+
+As classes para utilização do Tailwind é bem intuitiva e bem parecida com o próprio CSS. Por exemplo:
+- `m-4`: Margin com o espaçamento 4 do padrão. Aplica tanto na esquerda-direita quanto cima-baixo;
+- `hover:text-blue-700`: altera a cor do texto ao passar o mouse por cima do elemento.
+
+É bem intuitivo mexer. Aconselho a instalar a extensão de *auto-complete* para o VSCode que é simplesmente fantastica!
+
+```jsx filename=pages/index.js
+import Head from 'next/head'
+
+import Card from '../components/Card'
+
+export default function Home() {
+  return (
+    <div className='min-h-screen px-2 flex flex-col justify-center items-center h-screen'>
+      <Head>
+        <title>My Next Blog</title>
+      </Head>
+
+      <main className="py-20 flex-1 flex flex-col justify-center items-center">
+        <h1 className="text-4xl md:text-6xl">
+          Meu blog 😜
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
+          <Card
+            href="#"
+            title="Invertendo linked lists"
+            description="Descubra o segredo milenar para inverter uma linked list."
+          />
+        </div>
+      </main>
+
+      <footer className='p-6'>
+          Powered by Next + MDX
+      </footer>
+    </div>
+  )
+}
+```
+
+Continuando, vamos para a parte interessante e onde tudo vai acontecer. Iremos criar uma rota que receberá um parâmetro que iremos chamar de `slug`. Lembrando que no Next, ao criar um arquivo com `[` e fechando com `]` ele considera essa rota dinâmica! Então precisaremos falar para o Next quais rotas dos `posts` deveremos montar em tempo de build. Faremos isso mais para frente!
+
+```jsx filename=pages/posts/[slug].js
+function PostPage({ slug }) {
+  return <h1>{slug}</h1>
+}
+
+export const getStaticProps = async ({ params }) => {
+  return {
+    props: {
+      slug: params.slug
+    },
+  }
+}
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [{ params: { slug: 'teste' } }],
+    fallback: false,
+  }
+}
+
+export default PostPage
+```
+
+A página em si não está fazendo nada demais ainda. Estamos pegando o `slug` dos `params` e repassando para o componente `build time`. A única rota até então permitida é a rota `teste` também. Em breve tornaremos dinâmico baseado em nossos `posts`.
+
+- `getStaticProps` será responsável de carregar o arquivo e mandar todas as informações necessárias para o componente quando a aplicação for *buildada*.
+- `getStaticPaths` é responsável por dinamicamente informar quais rotas deverão ser montadas no *build*.
+
+Vamos popular esses metódos com as funções do `next-mdx-remote`. Antes disso, na raíz do projeto vamos criar uma pasta chamada `posts` e um arquivo chamado `primeiro-post.mdx` (tente seguir esse padrão *slugifado* para manter as URLs da sua aplicação consistete).
+
+```mdx filename=posts/primeiro-post.mdx
+---
+title: Meu primeiro post!
+description: Essa descrição do frontmatter.
+---
+
+Esse post é um exemplo com [link](https://nextjs.org).
+
+O título e a descrição são processados usando o `gray-matter`.
+```
+
+> Todo metadado da postagem ficará entre os `---` logo no ínicio do arquivo. Esse ínicio sera formatado pela dependência `gray-matter` automaticamente.
+
+Para gerar as páginas precisamos carregar o arquivo referente ao `slug` da nossa pasta de posts. Vamos criar um arquivo que servirá de auxilio para carregar esses posts:
+
+```js filename=utils/mdxUtils.js
+import fs from 'fs'
+import path from 'path'
+
+// POSTS_PATH é util quando você quer pegar o caminho específico do arquivo
+export const POSTS_PATH = path.join(process.cwd(), 'posts')
+
+// postFilePaths é a lista de todos os arquivos mdx dentro do diretório POSTS_PATHS
+export const postFilePaths = fs
+  .readdirSync(POSTS_PATH)
+  // Inlcui apenas arquivos md(x)
+  .filter((path) => /\.mdx?$/.test(path))
+```
+
+Utilizando esses métodos iremos carregar toda informação necessária para o componente. Altere o `getStaticProps` e `getStaticPaths` do arquivo da página de posts:
+
+
+```jsx filename=pages/posts/[slug].js lines=8,9,10
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+import { serialize } from 'next-mdx-remote/serialize'
+
+import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils'
+
+function PostPage({ source, frontMatter }) {
+  return <h1>Post</h1>
+}
+
+export const getStaticProps = async ({ params }) => {
+  const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`)
+  const source = fs.readFileSync(postFilePath)
+
+  const { content, data } = matter(source)
+
+  const mdxSource = await serialize(content, {
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+    },
+    scope: data,
+  })
+
+  return {
+    props: {
+      source: mdxSource,
+      frontMatter: data,
+    },
+  }
+}
+
+export const getStaticPaths = async () => {
+  const paths = postFilePaths
+    // Remove a extensão dos arquivos para montar as rotas
+    .map((path) => path.replace(/\.mdx?$/, ''))
+    // Mapeia para os parametros estaticos requeridos pelo Next.js
+    .map((slug) => ({ params: { slug } }))
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export default PostPage
+```
+
+Dei uma leve altareda no componente para ajeitar para os props que o `getStaticProps` irá passar:
+
+- **source**: é o conteúdo do post, ele é serializado pelo `next-mdx-remote` e será utlizado no componente do mesmo.
+- **frontMatter**: como citado mais em cima, é todo metadado que você pode incluir no post, seja título, descrição, imagens, ligugagem, etc...
+
+Para finalizar a composição do componente da nossa página, basta apenas apresentar o contéudo utilizando o componente `MDXRemote` exportado pelo `next-mdx-remote`. Todo o restante iremos pegar do `frontMatter`:
+
+```jsx filename=pages/posts/[slug].js lines=2
+...
+import { MDXRemote } from 'next-mdx-remote'
+...
+function PostPage({ source, frontMatter }) {
+  return (
+    <div className="prose p-12">
+      <h1>{frontMatter.title}</h1>
+      {frontMatter.description && (
+        <p className="description">{frontMatter.description}</p>
+      )}
+      <main>
+        <MDXRemote {...source} />
+      </main>
+    </div>
+  )
+}
+...
+```
+
+> Aplicando a classe `prose` do Tailwind, todo nosso markdown já terá um estilo pronto para ser usado.
+

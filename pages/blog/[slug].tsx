@@ -2,6 +2,8 @@ import Image from 'next/image'
 
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
+import styles from '@/styles/post.module.css'
+
 import { getPost, postFilePaths } from '@/utils/mdxUtils'
 import { formatDate } from '@/utils/dates'
 
@@ -17,23 +19,14 @@ const components = {
   code: (props) => {
     const language = props.className.replace(/language-/, '')
     return (
-      <Code
-        language={language}
-        border
-        {...props}
-        useDefaultHeight={false}
-        className="mb-3"
-      >
+      <Code language={language} contrast {...props} className="mb-3">
         {props.children.substring(0, props.children.length - 1)}
       </Code>
     )
   },
-  p: (props) => (
-    <Paragraph bigger={false} className="px-0 lg:px-12" {...props} />
-  ),
-  h1: (props) => <H1 className="px-0 lg:px-12" {...props} />,
-  h2: (props) => <H2 className="px-0 lg:px-12 mb-3" {...props} />,
-  h3: (props) => <H3 className="px-0 lg:px-12" {...props} />,
+  h1: (props) => <H1 {...props} />,
+  h2: (props) => <H2 className="mb-3" {...props} />,
+  h3: (props) => <H3 {...props} />,
   a: (props) => <Anchor className="text-color-section" {...props} />,
 }
 
@@ -63,7 +56,7 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
           {frontMatter.language}
         </Paragraph>
       </div>
-      <main className="w-full">
+      <main className={`w-full text-gray-800 dark:text-white ${styles.post}`}>
         <MDXRemote {...source} components={components} />
       </main>
     </Section>

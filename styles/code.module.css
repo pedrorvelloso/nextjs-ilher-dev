@@ -1,15 +1,3 @@
-.code {
-  @apply w-full rounded-md
-}
-
-.code-auto {
-  @apply h-auto w-full rounded-md
-}
-
-.code > pre {
-  @apply h-auto lg:h-code rounded-md
-}
-
 .code > pre::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -17,4 +5,22 @@
 
 .code > pre::-webkit-scrollbar-thumb {
   @apply bg-gray-700 rounded-sm
+}
+
+.code *[data-code-highlight='true']:before {
+  content: ' ';
+  position: absolute;
+  border-left-width: 5px;
+  border-style: solid;
+  left: 0;
+  @apply border-purple-800
+}
+
+.code *[data-code-highlight='true']:after {
+  content: '  ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  @apply bg-purple-500 bg-opacity-20
 }
