@@ -41,6 +41,7 @@ module.exports = {
         '7xl': '4.375rem', // 70px
       },
       spacing: {
+        17: '3.65rem',
         '5vw': '5vw',
         '8vw': '8vw',
         '10vw': '10vw',

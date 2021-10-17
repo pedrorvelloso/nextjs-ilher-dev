@@ -46,7 +46,7 @@ function Code({
         </span>
       )}
       {showLine(language) && (
-        <div className="absolute z-10 bottom-0 right-0 text-xs px-3 py-2 text-gray-600 font-mono">
+        <div className="absolute z-10 bottom-0 right-0 text-xs px-3 py-2 text-gray-600 font-mono comment">
           {language}
         </div>
       )}
@@ -75,16 +75,14 @@ function Code({
         style={ayu}
         showLineNumbers={showLine(language)}
         customStyle={{
-          fontFamily: "'JetBrains Mono', monospace",
-          width: '100%',
           padding: contrast ? '1.8em 1em' : '1em',
         }}
         className={clsx(
           {
-            'text-sm bg-gray-900': contrast,
-            'bg-code lg:h-code': !contrast,
+            'text-sm bg-gray-900 lg:rounded-md': contrast,
+            'bg-code lg:h-code rounded-md': !contrast,
           },
-          'w-full h-auto rounded-md',
+          'w-full h-auto font-mono',
         )}
       >
         {children}

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import slugify from 'slugify'
 
 import styles from '@/styles/post.module.css'
 
@@ -8,7 +9,6 @@ import { getPost, postFilePaths } from '@/utils/mdxUtils'
 import { formatDate } from '@/utils/dates'
 
 import { H1, H2, H3 } from '@/components/heading'
-import Section from '@/components/section'
 import Code from '@/components/code'
 import Anchor from '@/components/anchor'
 import Paragraph from '@/components/paragraph'
@@ -25,7 +25,13 @@ const components = {
       </Code>
     )
   },
-  h1: (props) => <H1 {...props} />,
+  h1: (props) => (
+    <H1 id={slugify(props.children.toLowerCase())}>
+      <Anchor href={`#${slugify(props.children.toLowerCase())}`}>
+        {props.children}
+      </Anchor>
+    </H1>
+  ),
   h2: (props) => <H2 className="mb-3" {...props} />,
   h3: (props) => <H3 {...props} />,
   a: (props) => <Anchor className="text-color-section" {...props} />,
@@ -43,8 +49,8 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
         pageTitle={frontMatter.title}
         meta={{ description: frontMatter.description }}
       />
-      <Section className="py-12">
-        <div className="lg:px-12">
+      <section className="lg:max-w-screen-xl lg:mx-auto lg:px-12 py-12">
+        <div className="lg:px-12 mx-10vw lg:mx-0">
           <H1>{frontMatter.title}</H1>
           <div className="relative overflow-hidden aspect-h-4 aspect-w-3 md:aspect-w-16 md:aspect-h-8 mx-auto mb-4 rounded-lg">
             <Image
@@ -63,10 +69,12 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
             {frontMatter.language}
           </Paragraph>
         </div>
-        <main className={`w-full text-gray-800 dark:text-white ${styles.post}`}>
+        <article
+          className={`w-full text-gray-800 dark:text-white ${styles.post}`}
+        >
           <MDXRemote {...source} components={components} />
-        </main>
-      </Section>
+        </article>
+      </section>
     </>
   )
 }
