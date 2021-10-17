@@ -21,6 +21,8 @@ function SEO({ pageTitle, meta: META }: SeoProps) {
     <Head>
       <title>{pageTitle}</title>
 
+      <meta property="description" content={meta.description} key="desc" />
+
       {/* Twitter */}
       <meta name="twitter:card" content="summary" key="twcard" />
       <meta
