@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require('tailwindcss/defaultTheme')
 
@@ -12,6 +13,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        code: '#10141c',
         'color-section': '#2ca9d4',
         southsystem: '#ff5100',
         'twitter-opacity': 'rgba(29, 161, 242, 0.08)',
@@ -39,6 +41,7 @@ module.exports = {
         '7xl': '4.375rem', // 70px
       },
       spacing: {
+        17: '3.65rem',
         '5vw': '5vw',
         '8vw': '8vw',
         '10vw': '10vw',
@@ -56,6 +59,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  // eslint-disable-next-line global-require
   plugins: [require('@tailwindcss/aspect-ratio')],
 }

@@ -7,22 +7,12 @@ import { ThemeProvider } from 'next-themes'
 import Navbar from '@/components/navbar'
 import SEO from '@/components/seo'
 
-import { MetaTags } from '@/models/app'
-
-const meta: MetaTags = {
-  twitter: {
-    handle: 'ilher',
-  },
-  description: 'Pedro Reis personal website',
-  siteName: 'Pedro Reis - Fullstack developer',
-}
-
 const THEME_STORAGE = '@ilher/theme'
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <SEO pageTitle="Pedro Reis - Fullstack developer" meta={meta} />
+      <SEO pageTitle="Pedro Reis - Fullstack developer" />
       <ThemeProvider
         attribute="class"
         storageKey={THEME_STORAGE}

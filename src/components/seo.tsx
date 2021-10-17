@@ -4,13 +4,24 @@ import { MetaTags } from '@/models/app'
 
 interface SeoProps {
   pageTitle: string
-  meta: MetaTags
+  meta?: MetaTags
 }
 
-function SEO({ pageTitle, meta }: SeoProps) {
+const defaultmeta: MetaTags = {
+  twitter: {
+    handle: 'ilher',
+  },
+  description: 'Pedro Reis personal website',
+  siteName: 'Pedro Reis - Fullstack developer',
+}
+
+function SEO({ pageTitle, meta: META }: SeoProps) {
+  const meta = META ? { ...defaultmeta, ...META } : defaultmeta
   return (
     <Head>
       <title>{pageTitle}</title>
+
+      <meta property="description" content={meta.description} key="desc" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary" key="twcard" />
@@ -22,7 +33,11 @@ function SEO({ pageTitle, meta }: SeoProps) {
 
       {/* Open Graph */}
       <meta property="og:site_name" content={meta.siteName} key="ogsitename" />
-      <meta property="og:title" content={pageTitle} key="ogtitle" />
+      <meta
+        property="og:title"
+        content={`${pageTitle} - ilher.dev`}
+        key="ogtitle"
+      />
       <meta property="og:description" content={meta.description} key="ogdesc" />
     </Head>
   )

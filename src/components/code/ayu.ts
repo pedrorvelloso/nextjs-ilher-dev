@@ -1,7 +1,6 @@
 export default {
   'code[class*="language-"]': {
     color: '#f8f8f2',
-    background: 'none',
     textShadow: '0 1px rgba(0, 0, 0, 0.3)',
     fontFamily: "'JetBrains Mono', monospace",
     textAlign: 'left',
@@ -20,7 +19,6 @@ export default {
   },
   'pre[class*="language-"]': {
     color: '#bfbdb6',
-    background: '#10141c',
     textShadow: '0 1px rgba(0, 0, 0, 0.3)',
     fontFamily: "'JetBrains Mono', monospace",
     textAlign: 'left',
@@ -36,10 +34,9 @@ export default {
     MozHyphens: 'none',
     msHyphens: 'none',
     hyphens: 'none',
-    padding: '1em',
-    margin: '.5em 0',
     overflow: 'auto',
-    borderRadius: '0.3em',
+    // borderRadius: '6px',
+    position: 'relative',
   },
   ':not(pre) > code[class*="language-"]': {
     background: '#10141c',
@@ -78,7 +75,7 @@ export default {
     color: '#39bae6',
   },
   deleted: {
-    color: '#39bae6',
+    color: '#ff7383',
   },
   boolean: {
     color: '#39bae6',
@@ -102,7 +99,7 @@ export default {
     color: '#e6b450',
   },
   inserted: {
-    color: '#e6b450',
+    color: '#6cbf43',
   },
   operator: {
     color: '#f29668',

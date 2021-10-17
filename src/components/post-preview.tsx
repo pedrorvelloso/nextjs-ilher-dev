@@ -1,32 +1,37 @@
 import Image from 'next/image'
+import Anchor from './anchor'
 
 interface PostPreviewProps {
   image: {
     url: string
-    author: string
-    unsplashUrl: string
+    alt: string
+    credit: string
   }
   title: string
   description: string
+  url: string
 }
 
-function PostPreview({ image, title, description }: PostPreviewProps) {
+function PostPreview({ image, title, description, url }: PostPreviewProps) {
   return (
-    <div className="group relative">
-      <div className="relative w-full h-80 rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+    <Anchor href={`/blog${url}`} underline={false} className="group relative">
+      <div className="relative w-full h-80 transition-all rounded-lg overflow-hidden group-hover:opacity-50 group-hover:-translate-y-2 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-3 lg:aspect-h-4">
         <Image
-          alt={`Photo by [${image.author}](${image.unsplashUrl})`}
+          alt={image.alt}
+          title={image.credit}
           src={image.url}
           layout="fill"
           objectFit="cover"
           objectPosition="center"
         />
       </div>
-      <h3 className="mt-6 text-sm text-gray-500 dark:text-gray-500 my-0">
+      <div className="text-gray-600 dark:text-gray-400 mt-4 text-xl">
+        {description}
+      </div>
+      <div className="text-2xl font-medium md:text-3xl text-gray-800 dark:text-white ">
         {title}
-      </h3>
-      <p className="text-base font-semibold dark:text-white">{description}</p>
-    </div>
+      </div>
+    </Anchor>
   )
 }
 

@@ -5,13 +5,15 @@ import { WithChildren } from '@/models/app'
 
 interface HeadingProps extends WithChildren {
   className?: string
+  id?: string
 }
 
 const H1 = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, children }, ref) => {
+  ({ className, id, children }, ref) => {
     return (
       <h1
         ref={ref}
+        id={id}
         className={clsx(
           className,
           'text-2xl lg:text-4xl text-gray-800 dark:text-white font-bold mb-4',
@@ -26,10 +28,11 @@ const H1 = forwardRef<HTMLHeadingElement, HeadingProps>(
 H1.displayName = 'H1'
 
 const H2 = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, children }, ref) => {
+  ({ className, id, children }, ref) => {
     return (
       <h2
         ref={ref}
+        id={id}
         className={clsx(
           className,
           'text-gray-600 dark:text-gray-400 text-lg lg:text-xl',
@@ -43,9 +46,11 @@ const H2 = forwardRef<HTMLHeadingElement, HeadingProps>(
 
 H2.displayName = 'H2'
 
-function H3({ className, children }: HeadingProps) {
+function H3({ className, id, children }: HeadingProps) {
   return (
-    <h3 className={clsx(className, 'text-lg text-gray-500')}>{children}</h3>
+    <h3 id={id} className={clsx(className, 'text-lg text-gray-500')}>
+      {children}
+    </h3>
   )
 }
 
