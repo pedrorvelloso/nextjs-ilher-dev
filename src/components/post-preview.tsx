@@ -15,7 +15,7 @@ interface PostPreviewProps {
 function PostPreview({ image, title, description, url }: PostPreviewProps) {
   return (
     <Anchor href={`/blog${url}`} underline={false} className="group relative">
-      <div className="relative w-full h-80 transition-opacity rounded-lg overflow-hidden group-hover:opacity-50 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-3 lg:aspect-h-4">
+      <div className="relative w-full h-80 transition-all rounded-lg overflow-hidden group-hover:opacity-50 group-hover:-translate-y-2 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-3 lg:aspect-h-4">
         <Image
           alt={image.alt}
           title={image.credit}

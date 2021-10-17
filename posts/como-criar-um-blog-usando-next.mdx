@@ -7,9 +7,9 @@ bannerUrl: https://res.cloudinary.com/ilher-dev/image/upload/c_fit,h_600,o_100/v
 bannerAlt: Sunset
 bannerCredit: Photo by [Johannes Plenio](https://unsplash.com/photos/qkfxBc2NQ18)
 ---
-Primeiramente sejam todos muito bem vindos! Esse será o primeiro post desse meu blog, em português, completamente servido pela [Vercel](https://vercel.com/)!
+Primeiramente sejam todos muito bem vindos! Esse será o primeiro post desse meu blog, em português, completamente servido pela [Vercel](https://vercel.com/)! Nunca tive essa experiência de escrever, mas quero ter essa oportunidade de repassar meu conhecimento dentro desse mundo da tecnologia.
 
-Vamos colocar a mão na massa e construir um blog super simples, mas com funcionalidades super utéis para te integrar ainda mais no universo do NextJS. Além disso utilizaremos o [TailwindCSS](https://tailwindcss.com/) para dar uma *tunada* em nossa aplicação.
+Vamos colocar a mão na massa e construir um blog super simples, mas com funcionalidades super utéis para te integrar ainda mais no universo do Next.js. Além disso utilizaremos o [TailwindCSS](https://tailwindcss.com/) para dar uma *tunada* em nossa aplicação.
 
 Para começar, iremos iniciar um projeto `Next` via cli. Neste exemplo utilizarei o `yarn`:
 
@@ -24,14 +24,12 @@ yarn add next-mdx-remote gray-matter tailwindcss@latest postcss@latest autoprefi
 ```
 
 ## O que é MDX?
-MDX é um formato que deixa a gente importar códigos JSX dentro de nosso arquivo *Markdown*. Com isso, escrever contéudos fica mais fácil, além de ser possível utilizar componentes específicos do React para melhorar ainda mais a visualização.
+MDX é um formato que nos deixa importar códigos JSX dentro de nosso arquivo *Markdown*. Com isso, escrever contéudos fica mais fácil, além de ser possível utilizar componentes específicos do React para melhorar ainda mais a visualização. Além disso, não precisaremos de nenhum tipo de gerenciador de contéudo, apenas um lugar para servir nossa aplicação. **Todo** conteúdo ficara junto do nosso código fonte.
 
 Para lidarmos com MDX estaremos utilizando o pacote [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote).
 
 ## E o TailwindCSS?
-TailwindCSS é um framework CSS mega completo para gerenciarmos a estilização da nossa página.
-
-Para continuarmos com nossa aplicação, é necessário iniciar o Tailwind na raiz do nosso projeto:
+TailwindCSS é um framework CSS mega completo para gerenciarmos a estilização da nossa página. Para continuarmos com nossa aplicação, é necessário iniciar o Tailwind na raiz do nosso projeto:
 
 ```sh
 npx tailwindcss init -p
@@ -43,7 +41,7 @@ Após isso, os arquivos `tailwind.config.js` e `postcss.config.js` serão criado
 yarn add @tailwindcss/typography
 ```
 
-Após instalado, adicione o requerimento do plugin no arquivo `tailwind.config.js`
+Com o *plugin* instalado, adicione o requerimento do *plugin* no arquivo `tailwind.config.js`
 
 ```js filename=tailwind.config.js lines=6
 module.exports = {
@@ -78,7 +76,7 @@ module.exports = {
 *O Tailwind vem com muitas classes CSS de apoio para construção do layout. Em produção, queremos garantir que só classes que utilizamos estejam disponivéis.*
 
 
-Agora, importaremos no arquivo `pages/_app.js` o arquivo CSS do Tailwind.
+Para utilizarmos todas essas classes, importaremos no arquivo `pages/_app.js` o arquivo CSS do Tailwind.
 
 ```diff filename=pages/_app.js
 - import '../styles/globals.css'
@@ -117,7 +115,7 @@ export default Card
 ```
 
 As classes para utilização do Tailwind é bem intuitiva e bem parecida com o próprio CSS. Por exemplo:
-- `m-4`: Margin com o espaçamento 4 do padrão. Aplica tanto na esquerda-direita quanto cima-baixo;
+- `m-4`: *Margin* com o espaçamento 4 do padrão. Aplica tanto na esquerda-direita quanto cima-baixo;
 - `hover:text-blue-700`: altera a cor do texto ao passar o mouse por cima do elemento.
 
 É bem intuitivo mexer. Aconselho a instalar a extensão de *auto-complete* para o VSCode que é simplesmente fantastica!
@@ -186,7 +184,11 @@ A página em si não está fazendo nada demais ainda. Estamos pegando o `slug` d
 - `getStaticProps` será responsável de carregar o arquivo e mandar todas as informações necessárias para o componente quando a aplicação for *buildada*.
 - `getStaticPaths` é responsável por dinamicamente informar quais rotas deverão ser montadas no *build*.
 
-Vamos popular esses metódos com as funções do `next-mdx-remote`. Antes disso, na raíz do projeto vamos criar uma pasta chamada `posts` e um arquivo chamado `primeiro-post.mdx` (tente seguir esse padrão *slugifado* para manter as URLs da sua aplicação consistete).
+A utlização desses métodos em conjunto, na forma em que foi usada, é o que chamamos de *Static Site Generation*.
+
+> Para ler mais sobre *Static Site Generation*, acesse a documentação do Next.js [aqui](https://nextjs.org/docs/basic-features/pages#static-generation-recommended).
+
+Vamos popular esses metódos com as funções do `next-mdx-remote`. Antes disso, na raíz do projeto vamos criar uma pasta chamada `posts` e um arquivo chamado `primeiro-post.mdx` (tente seguir esse padrão *slugifado* para manter as URLs da sua aplicação consistentes).
 
 ```mdx filename=posts/primeiro-post.mdx
 ---
@@ -199,7 +201,7 @@ Esse post é um exemplo com [link](https://nextjs.org).
 O título e a descrição são processados usando o `gray-matter`.
 ```
 
-> Todo metadado da postagem ficará entre os `---` logo no ínicio do arquivo. Esse ínicio sera formatado pela dependência `gray-matter` automaticamente.
+Todo metadado da postagem ficará entre os `---` logo no ínicio do arquivo. Esse ínicio sera formatado pela dependência `gray-matter` automaticamente.
 
 Para gerar as páginas precisamos carregar o arquivo referente ao `slug` da nossa pasta de posts. Vamos criar um arquivo que servirá de auxilio para carregar esses posts:
 
@@ -297,5 +299,131 @@ function PostPage({ source, frontMatter }) {
 ...
 ```
 
-> Aplicando a classe `prose` do Tailwind, todo nosso markdown já terá um estilo pronto para ser usado.
+Aplicando a classe `prose` do Tailwind, todo nosso markdown já terá um estilo pronto para tratar nosso *markdown*.
 
+Pronto, ao acessar o link do nosso post basta navegar até [http://localhost:3000/posts/primeiro-post](http://localhost:3000/posts/primeiro-post).
+
+![Primeiro post!](https://res.cloudinary.com/ilher-dev/image/upload/v1634395542/Screenshot_from_2021-10-16_11-44-17_dbqjpt.webp)
+
+Para finalizar, iremos até nosso arquivo da página inicial, e carregaremos os posts de uma forma semelhante a página de post. No entanto, para página inicial, não é necessário serializar o contéudo, apenas pegar os metadados com o `gray-matter`.
+
+```jsx filename=pages/index.js lines=3,4,5,6,23,24,25,26,27,28,29,30,41,42,43,44,45,46,47,48,49,50,51,52,53,54
+import Head from 'next/head'
+
+import path from 'path'
+import fs from 'fs'
+import matter from 'gray-matter'
+import { postFilePaths, POSTS_PATH } from '../utils/mdxUtils'
+
+import Card from '../components/Card'
+
+export default function Home({ posts }) {
+  return (
+    <div className='min-h-screen px-2 flex flex-col justify-center items-center h-screen'>
+      <Head>
+        <title>My Next Blog</title>
+      </Head>
+
+      <main className="py-20 flex-1 flex flex-col justify-center items-center">
+        <h1 className="text-4xl md:text-6xl">
+          Meu blog 😜
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
+          {posts.map((post) => (
+            <Card
+              key={post.filePath}
+              href={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
+              title={post.data.title}
+              description={post.data.description}
+            />
+          ))}
+        </div>
+      </main>
+
+      <footer className='p-6'>
+          Powered by Next + MDX
+      </footer>
+    </div>
+  )
+}
+
+export const getStaticProps = () => {
+  const posts = postFilePaths.map((filePath) => {
+    const source = fs.readFileSync(path.join(POSTS_PATH, filePath))
+    const { content, data } = matter(source)
+
+    return {
+      content,
+      data,
+      filePath,
+    }
+  })
+
+  return { props: { posts } }
+}
+```
+
+![Página inicial!](https://res.cloudinary.com/ilher-dev/image/upload/v1634396534/Screenshot_from_2021-10-16_12-02-02_sbmkr9.webp)
+
+Como citei no inicio da postagem, é possível importar componentes React para nosso arquivo MDX. Para isso, devemos fornecer um objeto de componentes para o `MDXRemote`. Irei criar um componente de contador simples como teste:
+
+```jsx filename=components/Test.js
+import { useState } from 'react'
+
+function Test() {
+  const [counter, setCounter] = useState(0)
+
+  return (
+    <div>
+      {counter}
+      <button
+        type="button"
+        onClick={() => setCounter(c => c + 1)}
+        className="m-2 bg-gray-300 p-4"
+      >
+          +
+        </button>
+      <button
+        type="button"
+        onClick={() => setCounter(c => c - 1)}
+        className="m-2 bg-gray-300 p-4"
+      >
+
+          -
+        </button>
+    </div>
+  )
+}
+
+export default Test
+```
+
+Voltando no arquivo `pages/posts/[slug].js` vamos importar, criar um objeto contendo esse componente e prover para o componente `MDXRemote`
+
+```jsx filename=pages/posts/[slug].jsx lines=2,5,15
+...
+import Test from '../../components/Test'
+...
+
+const components = { Test }
+
+function PostPage({ source, frontMatter }) {
+  return (
+    <div className="prose p-12">
+      <h1>{frontMatter.title}</h1>
+      {frontMatter.description && (
+        <p className="description">{frontMatter.description}</p>
+      )}
+      <main>
+        <MDXRemote {...source} components={components} />
+      </main>
+    </div>
+  )
+}
+...
+```
+
+E agora temos um componente de contador em nosso MDX!
+
+![Aplicação com contador](https://res.cloudinary.com/ilher-dev/image/upload/v1634472303/app-blog_icvjf2.gif)

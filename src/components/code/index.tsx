@@ -41,12 +41,12 @@ function Code({
       )}
     >
       {filename && (
-        <span className="text-xs px-3 py-2 text-gray-600 z-10 absolute">
+        <span className="text-xs px-3 py-2 text-gray-600 z-10 absolute font-mono">
           {filename}
         </span>
       )}
       {showLine(language) && (
-        <div className="absolute z-10 bottom-0 right-0 text-xs px-3 py-2 text-gray-600">
+        <div className="absolute z-10 bottom-0 right-0 text-xs px-3 py-2 text-gray-600 font-mono">
           {language}
         </div>
       )}

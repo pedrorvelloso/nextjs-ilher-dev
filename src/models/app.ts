@@ -3,9 +3,9 @@ export interface WithChildren {
 }
 
 export interface MetaTags {
-  twitter: {
+  twitter?: {
     handle: string
   }
-  siteName: string
-  description: string
+  siteName?: string
+  description?: string
 }

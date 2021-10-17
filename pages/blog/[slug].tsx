@@ -14,6 +14,7 @@ import Anchor from '@/components/anchor'
 import Paragraph from '@/components/paragraph'
 
 import { Post } from '@/models/blog'
+import SEO from '@/components/seo'
 
 const components = {
   code: (props) => {
@@ -37,29 +38,36 @@ interface BlogPostInterface {
 
 export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
   return (
-    <Section className="py-12">
-      <div className="lg:px-12">
-        <H1>{frontMatter.title}</H1>
-        <div className="aspect-h-4 aspect-w-3 md:aspect-w-16 md:aspect-h-8 mx-auto mb-4">
-          <Image
-            alt={frontMatter.bannerCredit}
-            src={frontMatter.bannerUrl}
-            title={frontMatter.bannerCredit}
-            layout="fill"
-            objectFit="cover"
-          />
+    <>
+      <SEO
+        pageTitle={frontMatter.title}
+        meta={{ description: frontMatter.description }}
+      />
+      <Section className="py-12">
+        <div className="lg:px-12">
+          <H1>{frontMatter.title}</H1>
+          <div className="relative overflow-hidden aspect-h-4 aspect-w-3 md:aspect-w-16 md:aspect-h-8 mx-auto mb-4 rounded-lg">
+            <Image
+              alt={frontMatter.bannerCredit}
+              src={frontMatter.bannerUrl}
+              title={frontMatter.bannerCredit}
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </div>
+          <H2>{frontMatter.description}</H2>
+          <Paragraph bigger={false} isDescription>
+            {formatDate(frontMatter.date)} -{' '}
+            <span className="mr-2">{frontMatter.readTime}</span>
+            {frontMatter.language}
+          </Paragraph>
         </div>
-        <H2>{frontMatter.description}</H2>
-        <Paragraph bigger={false} isDescription>
-          {formatDate(frontMatter.date)} -{' '}
-          <span className="mr-2">{frontMatter.readTime}</span>
-          {frontMatter.language}
-        </Paragraph>
-      </div>
-      <main className={`w-full text-gray-800 dark:text-white ${styles.post}`}>
-        <MDXRemote {...source} components={components} />
-      </main>
-    </Section>
+        <main className={`w-full text-gray-800 dark:text-white ${styles.post}`}>
+          <MDXRemote {...source} components={components} />
+        </main>
+      </Section>
+    </>
   )
 }
 
