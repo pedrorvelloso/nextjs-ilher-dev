@@ -51,5 +51,5 @@ export async function getLatestPosts() {
     return +new Date(postB.date) - +new Date(postA.date)
   })
 
-  return loadedPosts.slice(0, 3)
+  return loadedPosts
 }

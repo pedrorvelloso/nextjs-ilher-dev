@@ -23,7 +23,7 @@ export default function Home({ posts }: HomeProps) {
 }
 
 export const getStaticProps = async () => {
-  const posts = await getLatestPosts()
+  const posts = (await getLatestPosts()).slice(0, 3)
 
   return {
     props: {

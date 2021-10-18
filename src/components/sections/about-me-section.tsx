@@ -8,7 +8,7 @@ import { socials } from '@/utils/socials'
 
 function AboutMeSection() {
   return (
-    <Section className="py-12">
+    <Section featured>
       <div className="flex flex-col lg:flex-row justify-between">
         <div className="max-w-2xl">
           <H3>Heeeeey, listen! 🧚 </H3>

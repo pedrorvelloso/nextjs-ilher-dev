@@ -15,6 +15,8 @@ import Paragraph from '@/components/paragraph'
 
 import { Post } from '@/models/blog'
 import SEO from '@/components/seo'
+import NavigationButton from '@/components/navigation-button'
+import Section from '@/components/section'
 
 const components = {
   code: (props) => {
@@ -49,6 +51,11 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
         pageTitle={frontMatter.title}
         meta={{ description: frontMatter.description }}
       />
+      <Section as="div" className="flex">
+        <NavigationButton href="/blog" direction="backward">
+          Back to posts
+        </NavigationButton>
+      </Section>
       <section className="lg:max-w-screen-xl lg:mx-auto lg:px-12 py-12">
         <div className="lg:px-12 mx-10vw lg:mx-0">
           <H1>{frontMatter.title}</H1>
