@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useTheme } from 'next-themes'
 
 import { MetaTags } from '@/models/app'
 
@@ -17,11 +18,17 @@ const defaultmeta: MetaTags = {
 
 function SEO({ pageTitle, meta: META }: SeoProps) {
   const meta = META ? { ...defaultmeta, ...META } : defaultmeta
+  const { theme } = useTheme()
+
   return (
     <Head>
       <title>{pageTitle}</title>
 
       <meta name="description" content={meta.description} key="desc" />
+      <meta
+        name="color-scheme"
+        content={theme === 'dark' ? 'dark light' : 'light dark'}
+      />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary" key="twcard" />

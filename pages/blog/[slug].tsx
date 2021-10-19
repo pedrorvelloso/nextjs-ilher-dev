@@ -3,8 +3,6 @@ import Image from 'next/image'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import slugify from 'slugify'
 
-import styles from '@/styles/post.module.css'
-
 import { getPost, postFilePaths } from '@/utils/mdxUtils'
 import { formatDate } from '@/utils/dates'
 
@@ -76,9 +74,7 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
             {frontMatter.language}
           </Paragraph>
         </div>
-        <article
-          className={`w-full text-gray-800 dark:text-white ${styles.post}`}
-        >
+        <article className="post">
           <MDXRemote {...source} components={components} />
         </article>
       </section>

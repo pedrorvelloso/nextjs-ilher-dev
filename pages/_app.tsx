@@ -11,20 +11,19 @@ const THEME_STORAGE = '@ilher/theme'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <ThemeProvider
+      attribute="class"
+      storageKey={THEME_STORAGE}
+      defaultTheme="dark"
+      enableSystem={false}
+      enableColorScheme={false}
+    >
       <SEO pageTitle="Pedro Reis - Fullstack developer" />
-      <ThemeProvider
-        attribute="class"
-        storageKey={THEME_STORAGE}
-        defaultTheme="dark"
-        enableSystem={false}
-      >
-        <div className="min-h-screen">
-          <Navbar />
-          <Component {...pageProps} />
-        </div>
-      </ThemeProvider>
-    </>
+      <div className="min-h-screen">
+        <Navbar />
+        <Component {...pageProps} />
+      </div>
+    </ThemeProvider>
   )
 }
 

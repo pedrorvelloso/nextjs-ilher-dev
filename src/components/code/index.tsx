@@ -2,8 +2,6 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import clsx from 'clsx'
 import twTheme from 'tailwindcss/defaultTheme'
 
-import style from '@/styles/code.module.css'
-
 import { WithChildren } from '@/models/app'
 import { showLine } from '@/utils/codeUtils'
 
@@ -30,13 +28,12 @@ function Code({
   return (
     <div
       className={clsx(
-        'w-full relative',
+        'code-playground',
         {
           'rounded-md': !contrast,
           'h-auto lg:rounded-md': contrast,
           'm-2': !contrast,
         },
-        style.code,
         className,
       )}
     >
