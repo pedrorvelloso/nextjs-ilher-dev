@@ -389,9 +389,8 @@ function Test() {
         onClick={() => setCounter(c => c - 1)}
         className="m-2 bg-gray-300 p-4"
       >
-
-          -
-        </button>
+        -
+      </button>
     </div>
   )
 }
@@ -424,6 +423,27 @@ function PostPage({ source, frontMatter }) {
 ...
 ```
 
+O componente `Test` estará disponível dentro do contexto do MDX. Podemos usa-lo normalmente em nosso arquivo `.mdx` agora:
+
+```mdx filename=posts/primeiro-post.mdx
+---
+title: Meu primeiro post!
+description: Essa descrição do frontmatter.
+---
+
+Esse post é um exemplo com [link](https://nextjs.org).
+
+O título e a descrição são processados usando o `gray-matter`.
+
+<Test />
+```
+
 E agora temos um componente de contador em nosso MDX!
 
 ![Aplicação com contador](https://res.cloudinary.com/ilher-dev/image/upload/v1634472303/app-blog_icvjf2.gif)
+
+## Finalizando o projeto
+
+Agora com o projeto finalizado, você pode fazer o *deploy* na Vercel, do mesmo jeito que esse meu blog é! Caso queiram conferir o código fonte do projeto final basta acessar o repositório:
+
+<GithubCard title="nextjs-blog" description="Next.js + MDX blog" language="Javascript" href="#" />

@@ -15,6 +15,7 @@ import { Post } from '@/models/blog'
 import SEO from '@/components/seo'
 import NavigationButton from '@/components/navigation-button'
 import Section from '@/components/section'
+import GithubCard from '@/components/github-card'
 
 const components = {
   code: (props) => {
@@ -35,6 +36,11 @@ const components = {
   h2: (props) => <H2 className="mb-3" {...props} />,
   h3: (props) => <H3 {...props} />,
   a: (props) => <Anchor className="text-color-section" {...props} />,
+  GithubCard: (props) => (
+    <div className="flex justify-center">
+      <GithubCard {...props} />
+    </div>
+  ),
 }
 
 interface BlogPostInterface {
