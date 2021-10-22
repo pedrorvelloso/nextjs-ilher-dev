@@ -61,7 +61,7 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
         </NavigationButton>
       </Section>
       <section className="lg:max-w-screen-xl lg:mx-auto lg:px-12 py-12">
-        <div className="lg:px-12 mx-10vw lg:mx-0">
+        <div className="lg:px-12 mx-10vw lg:mx-0 mb-16">
           <H1>{frontMatter.title}</H1>
           <div className="relative overflow-hidden aspect-h-4 aspect-w-3 md:aspect-w-16 md:aspect-h-8 mx-auto mb-4 rounded-lg">
             <Image
@@ -74,7 +74,7 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
             />
           </div>
           <H2>{frontMatter.description}</H2>
-          <Paragraph bigger={false} isDescription>
+          <Paragraph bigger={false}>
             {formatDate(frontMatter.date)} -{' '}
             <span className="mr-2">{frontMatter.readTime}</span>
             {frontMatter.language}

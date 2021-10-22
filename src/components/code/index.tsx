@@ -76,7 +76,7 @@ function Code({
         }}
         className={clsx(
           {
-            'text-sm bg-gray-800 lg:rounded-md': contrast,
+            'text-sm bg-gray-800 dark:bg-opacity-60 lg:rounded-md': contrast,
             'bg-code lg:h-code rounded-md': !contrast,
           },
           'w-full h-auto font-mono',

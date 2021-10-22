@@ -95,7 +95,7 @@ Pronto, estamos prontos para começar a codar!
 
 Vamos começar a usar o Tailwind para dar uma cara pra página inicial. A idéia é ter uma página com o título do nosso site e com cards para exibirmos nossas postagens.
 
-Iremos componentizar esse `Card` e alterar nossa página inicial para usar Tailwind:
+Iremos componentizar esse `Card` e alterar nossa página inicial para usar Tailwind, crie uma pasta na raíz do projeto chamada `components` e dentro dessa pasta iremos criar o `Card.js`:
 
 ```jsx filename=components/Card.js
 import Link from 'next/link'
@@ -115,10 +115,14 @@ export default Card
 ```
 
 As classes para utilização do Tailwind é bem intuitiva e bem parecida com o próprio CSS. Por exemplo:
-- `m-4`: *Margin* com o espaçamento 4 do padrão. Aplica tanto na esquerda-direita quanto cima-baixo;
+- `m-4`: *Margin* com o espaçamento 4 do padrão. Aplica tanto na esquerda-direita quanto cima-baixo. Vale lembrar que o **4** não significa **4 pixels**, mas sim a escala de espaçamento do Tailwind;
 - `hover:text-blue-700`: altera a cor do texto ao passar o mouse por cima do elemento.
 
+> Para ler sobre o espaçamento do Tailwind basta acessar [esse link](https://tailwindcss.com/docs/customizing-spacing).
+
 É bem intuitivo mexer. Aconselho a instalar a extensão de *auto-complete* para o VSCode que é simplesmente fantastica!
+
+Para a página incial, iremos alterar o arquivo `index.js` da pasta `pages`:
 
 ```jsx filename=pages/index.js
 import Head from 'next/head'
@@ -154,9 +158,11 @@ export default function Home() {
 }
 ```
 
-Continuando, vamos para a parte interessante e onde tudo vai acontecer. Iremos criar uma rota que receberá um parâmetro que iremos chamar de `slug`. Lembrando que no Next, ao criar um arquivo com `[` e fechando com `]` ele considera essa rota dinâmica! Então precisaremos falar para o Next quais rotas dos `posts` deveremos montar em tempo de build. Faremos isso mais para frente!
+Continuando, vamos para a parte interessante e onde tudo vai acontecer. Iremos criar uma rota que receberá um parâmetro que iremos chamar de `slug` (vai ser o paramêtro dinâmico da nossa rota). Lembrando que no Next, ao criar um arquivo com `[` e fechando com `]` ele considera essa rota dinâmica! Então precisaremos falar para o Next quais rotas dos `posts` deveremos montar em tempo de build. Faremos isso mais para frente!
 
-```jsx filename=pages/posts/[slug].js
+Crie uma pasta dentro de `pages` chamada `blog`, que será a rota do nosso blog em si e crie o arquivo `[slug].js`:
+
+```jsx filename=pages/blog/[slug].js
 function PostPage({ slug }) {
   return <h1>{slug}</h1>
 }
@@ -179,7 +185,7 @@ export const getStaticPaths = async () => {
 export default PostPage
 ```
 
-A página em si não está fazendo nada demais ainda. Estamos pegando o `slug` dos `params` e repassando para o componente `build time`. A única rota até então permitida é a rota `teste` também. Em breve tornaremos dinâmico baseado em nossos `posts`.
+A página em si não está fazendo nada demais ainda. Estamos pegando o `slug` dos `params` e repassando para o componente em *build time*. A única rota até então permitida é a rota `teste` também. Em breve tornaremos dinâmico baseado em nossos `posts`.
 
 - `getStaticProps` será responsável de carregar o arquivo e mandar todas as informações necessárias para o componente quando a aplicação for *buildada*.
 - `getStaticPaths` é responsável por dinamicamente informar quais rotas deverão ser montadas no *build*.
@@ -188,7 +194,7 @@ A utlização desses métodos em conjunto, na forma em que foi usada, é o que c
 
 > Para ler mais sobre *Static Site Generation*, acesse a documentação do Next.js [aqui](https://nextjs.org/docs/basic-features/pages#static-generation-recommended).
 
-Vamos popular esses metódos com as funções do `next-mdx-remote`. Antes disso, na raíz do projeto vamos criar uma pasta chamada `posts` e um arquivo chamado `primeiro-post.mdx` (tente seguir esse padrão *slugifado* para manter as URLs da sua aplicação consistentes).
+Vamos popular esses metódos com as funções do `next-mdx-remote`. Antes disso, na **raíz** do projeto vamos criar uma pasta chamada `posts` e um arquivo chamado `primeiro-post.mdx` (tente seguir esse padrão *slugifado* para manter as URLs da sua aplicação consistentes).
 
 ```mdx filename=posts/primeiro-post.mdx
 ---
@@ -203,7 +209,7 @@ O título e a descrição são processados usando o `gray-matter`.
 
 Todo metadado da postagem ficará entre os `---` logo no ínicio do arquivo. Esse ínicio sera formatado pela dependência `gray-matter` automaticamente.
 
-Para gerar as páginas precisamos carregar o arquivo referente ao `slug` da nossa pasta de posts. Vamos criar um arquivo que servirá de auxilio para carregar esses posts:
+Para gerar as páginas precisamos carregar o arquivo referente ao `slug` da nossa pasta de posts. Vamos criar uma pasta na **raíz** do projeto chamada `utils` e um arquivo chamado `mdxUtils.js` que servirá de auxilio para carregar esses posts:
 
 ```js filename=utils/mdxUtils.js
 import fs from 'fs'
@@ -222,7 +228,7 @@ export const postFilePaths = fs
 Utilizando esses métodos iremos carregar toda informação necessária para o componente. Altere o `getStaticProps` e `getStaticPaths` do arquivo da página de posts:
 
 
-```jsx filename=pages/posts/[slug].js lines=8,9,10
+```jsx filename=pages/blog/[slug].js lines=8,9,10
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -279,7 +285,7 @@ Dei uma leve altareda no componente para ajeitar para os props que o `getStaticP
 
 Para finalizar a composição do componente da nossa página, basta apenas apresentar o contéudo utilizando o componente `MDXRemote` exportado pelo `next-mdx-remote`. Todo o restante iremos pegar do `frontMatter`:
 
-```jsx filename=pages/posts/[slug].js lines=2
+```jsx filename=pages/blog/[slug].js lines=2
 ...
 import { MDXRemote } from 'next-mdx-remote'
 ...
@@ -301,9 +307,9 @@ function PostPage({ source, frontMatter }) {
 
 Aplicando a classe `prose` do Tailwind, todo nosso markdown já terá um estilo pronto para tratar nosso *markdown*.
 
-Pronto, ao acessar o link do nosso post basta navegar até [http://localhost:3000/posts/primeiro-post](http://localhost:3000/posts/primeiro-post).
+Pronto, ao acessar o link do nosso post basta navegar até [http://localhost:3000/blog/primeiro-post](http://localhost:3000/blog/primeiro-post).
 
-![Primeiro post!](https://res.cloudinary.com/ilher-dev/image/upload/v1634395542/Screenshot_from_2021-10-16_11-44-17_dbqjpt.webp)
+![Primeiro post!](https://res.cloudinary.com/ilher-dev/image/upload/v1634927649/Screenshot_from_2021-10-22_15-32-54_fozwbr.webp)
 
 Para finalizar, iremos até nosso arquivo da página inicial, e carregaremos os posts de uma forma semelhante a página de post. No entanto, para página inicial, não é necessário serializar o contéudo, apenas pegar os metadados com o `gray-matter`.
 
@@ -333,7 +339,7 @@ export default function Home({ posts }) {
           {posts.map((post) => (
             <Card
               key={post.filePath}
-              href={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
+              href={`/blog/${post.filePath.replace(/\.mdx?$/, '')}`}
               title={post.data.title}
               description={post.data.description}
             />
@@ -366,7 +372,9 @@ export const getStaticProps = () => {
 
 ![Página inicial!](https://res.cloudinary.com/ilher-dev/image/upload/v1634396534/Screenshot_from_2021-10-16_12-02-02_sbmkr9.webp)
 
-Como citei no inicio da postagem, é possível importar componentes React para nosso arquivo MDX. Para isso, devemos fornecer um objeto de componentes para o `MDXRemote`. Irei criar um componente de contador simples como teste:
+## Indo além
+
+Como citei no inicio da postagem, é possível importar componentes React para nosso arquivo MDX. Para isso, devemos fornecer um objeto de componentes para o `MDXRemote`. Irei criar um componente de contador simples como teste. Dentro da pasta de `components` crie o componente `Test.js`:
 
 ```jsx filename=components/Test.js
 import { useState } from 'react'
@@ -398,9 +406,9 @@ function Test() {
 export default Test
 ```
 
-Voltando no arquivo `pages/posts/[slug].js` vamos importar, criar um objeto contendo esse componente e prover para o componente `MDXRemote`
+Voltando no arquivo `pages/blog/[slug].js` vamos importar, criar um objeto contendo esse componente e prover para o componente `MDXRemote`
 
-```jsx filename=pages/posts/[slug].jsx lines=2,5,15
+```jsx filename=pages/blog/[slug].jsx lines=2,5,15
 ...
 import Test from '../../components/Test'
 ...
@@ -440,10 +448,10 @@ O título e a descrição são processados usando o `gray-matter`.
 
 E agora temos um componente de contador em nosso MDX!
 
-![Aplicação com contador](https://res.cloudinary.com/ilher-dev/image/upload/v1634472303/app-blog_icvjf2.gif)
+![Aplicação com contador](https://res.cloudinary.com/ilher-dev/image/upload/v1634927639/blog_m4yvkx.gif)
 
 ## Finalizando o projeto
 
 Agora com o projeto finalizado, você pode fazer o *deploy* na Vercel, do mesmo jeito que esse meu blog é! Caso queiram conferir o código fonte do projeto final basta acessar o repositório:
 
-<GithubCard title="nextjs-blog" description="Next.js + MDX blog" language="Javascript" href="#" />
+<GithubCard title="nextjs-blog" description="Next.js + MDX blog" language="Javascript" owner="pedrorvelloso" repo="nextjs-blog" />

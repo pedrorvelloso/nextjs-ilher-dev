@@ -3,7 +3,8 @@ import Anchor from '@/components/anchor'
 type GithubCardLanguages = 'javascript' | 'typescript'
 
 interface GithubCardProps {
-  href: string
+  owner: string
+  repo: string
   title: string
   description: string
   language: GithubCardLanguages
@@ -14,10 +15,19 @@ const languageColor = {
   typescript: 'bg-blue-500',
 }
 
-function GithubCard({ href, title, description, language }: GithubCardProps) {
+function GithubCard({
+  owner,
+  repo,
+  title,
+  description,
+  language,
+}: GithubCardProps) {
   return (
     <div className="github-card border border-solid border-gray-400 dark:border-gray-700 w-full lg:w-1/2 p-4 rounded-md flex flex-col">
-      <Anchor href={href} className="text-blue-500 font-bold">
+      <Anchor
+        href={`https://github.com/${owner}/${repo}`}
+        className="text-blue-500 font-bold"
+      >
         {title}
       </Anchor>
       <div className="mb-6 mt-2 text-sm text-gray-700 dark:text-gray-400">
