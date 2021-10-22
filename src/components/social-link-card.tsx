@@ -8,7 +8,8 @@ type InheritFromAnchorProps = Omit<Omit<AnchorProps, 'children'>, 'underline'>
 export interface SocialLinkCardProps extends InheritFromAnchorProps {
   icon: IconType
   title: string
-  social: 'twitter' | 'github' | 'instagram' | 'linkedin' | 'twitch'
+  social: 'twitter' | 'github' | 'instagram' | 'linkedin' | 'twitch' | 'email'
+  asFootnote?: boolean
 }
 
 function SocialLinkCard({
@@ -17,6 +18,7 @@ function SocialLinkCard({
   href,
   className,
   social,
+  asFootnote = false,
 }: SocialLinkCardProps) {
   return (
     <Anchor
@@ -34,23 +36,30 @@ function SocialLinkCard({
             social === 'linkedin',
           'bg-instagram-opacity hover:bg-instagram text-instagram hover:text-white':
             social === 'instagram',
+          'bg-gray-700 hover:bg-gray-600 text-gray-800 hover:text-white':
+            social === 'email',
         },
-        'flex flex-col items-center w-auto lg:w-40 h-auto lg:h-40 p-8 group rounded-lg transition-colors duration-200',
+        'flex flex-col items-center group rounded-lg transition-colors duration-200',
         'hover:scale-110 transition-transform hover:shadow-md',
+        {
+          'w-auto lg:w-40 h-auto lg:h-40 p-8': !asFootnote,
+          'p-4': asFootnote,
+        },
       )}
       underline={false}
     >
       <Icon
-        size={38}
+        size={asFootnote ? 24 : 38}
         className={clsx('transition-colors', {
           'text-twitter group-hover:text-white': social === 'twitter',
           'text-gray-700 group-hover:text-white': social === 'github',
           'text-instagram group-hover:text-white': social === 'instagram',
           'text-linkedin group-hover:text-white': social === 'linkedin',
           'text-twitch group-hover:text-white': social === 'twitch',
+          'text-gray-800 group-hover:text-gray-200': social === 'email',
         })}
       />
-      <p className="mt-5 text-lg font-bold">{title}</p>
+      {!asFootnote && <p className="mt-5 text-lg font-bold">{title}</p>}
     </Anchor>
   )
 }

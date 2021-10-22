@@ -4,14 +4,16 @@
 
 @layer utilities {
   @variants responsive {
-    .avatar-big {
-      width: 226px;
-      height: 226px;
+    .avatar-lg {
+      @apply w-[226px] h-[226px];
     }
 
-    .avatar-small {
-      width: 116px;
-      height: 116px;
+    .avatar-sm {
+      @apply w-[116px] h-[116px];
+    }
+
+    .avatar-xs {
+      @apply w-[82px] h-[82px];
     }
   }
 }

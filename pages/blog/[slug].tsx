@@ -6,16 +6,17 @@ import slugify from 'slugify'
 import { getPost, postFilePaths } from '@/utils/mdxUtils'
 import { formatDate } from '@/utils/dates'
 
+import { Post } from '@/models/blog'
+
 import { H1, H2, H3 } from '@/components/heading'
 import Code from '@/components/code'
 import Anchor from '@/components/anchor'
 import Paragraph from '@/components/paragraph'
-
-import { Post } from '@/models/blog'
 import SEO from '@/components/seo'
 import NavigationButton from '@/components/navigation-button'
 import Section from '@/components/section'
 import GithubCard from '@/components/github-card'
+import Footer from '@/components/footer'
 
 const components = {
   code: (props) => {
@@ -80,9 +81,10 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
             {frontMatter.language}
           </Paragraph>
         </div>
-        <article className="post">
+        <article className="post mb-24 lg:mb-36">
           <MDXRemote {...source} components={components} />
         </article>
+        <Footer />
       </section>
     </>
   )
