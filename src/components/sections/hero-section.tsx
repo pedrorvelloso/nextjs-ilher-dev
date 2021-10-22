@@ -2,10 +2,9 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 import Section from '@/components/section'
-import { H1 as Heading1, H2 as Heading2 } from '@/components/heading'
+import { H1 as Heading1 } from '@/components/heading'
 
 const H1 = motion(Heading1)
-const H2 = motion(Heading2)
 
 const childVariants = {
   initial: { opacity: 0, y: 25 },
@@ -44,10 +43,13 @@ function HeroSection() {
         <H1 variants={childVariants} className="leading-tight text-center">
           Full stacker developer
         </H1>
-        <H2 variants={childVariants} className="text-center">
+        <motion.p
+          variants={childVariants}
+          className="text-gray-800 dark:text-gray-400 text-lg lg:text-xl text-center"
+        >
           Hey, I’m Pedro Reis. Software developer focused on delivering amazing
           experiences.
-        </H2>
+        </motion.p>
       </motion.div>
     </Section>
   )

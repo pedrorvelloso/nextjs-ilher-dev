@@ -1,5 +1,6 @@
 :root {
   --color-white: #FFF;
+  --color-dark-blue: #131822;
 }
 
 .light {
@@ -7,7 +8,7 @@
 }
 
 .dark {
-  --bg-primary: #10141c;
+  --bg-primary: var(--color-dark-blue);
 }
 
 .text-primary {

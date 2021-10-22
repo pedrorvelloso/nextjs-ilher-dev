@@ -13,7 +13,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        code: '#10141c',
+        code: 'var(--color-dark-blue)',
         'color-section': '#2ca9d4',
         southsystem: '#ff5100',
         'twitter-opacity': 'rgba(29, 161, 242, 0.08)',

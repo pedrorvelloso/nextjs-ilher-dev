@@ -42,7 +42,7 @@
 
   /* POST */
   .post {
-    @apply w-full text-gray-800 dark:text-white
+    @apply w-full text-gray-800 dark:text-gray-400
   }
 
   .post > *:not(pre) {

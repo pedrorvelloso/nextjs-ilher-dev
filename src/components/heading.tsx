@@ -16,7 +16,7 @@ const H1 = forwardRef<HTMLHeadingElement, HeadingProps>(
         id={id}
         className={clsx(
           className,
-          'text-2xl lg:text-4xl text-gray-800 dark:text-white font-bold mb-4',
+          'text-2xl lg:text-4xl text-gray-800 dark:text-gray-100 font-bold mb-4',
         )}
       >
         {children}
@@ -33,10 +33,7 @@ const H2 = forwardRef<HTMLHeadingElement, HeadingProps>(
       <h2
         ref={ref}
         id={id}
-        className={clsx(
-          className,
-          'text-gray-600 dark:text-gray-400 text-lg lg:text-xl',
-        )}
+        className={clsx(className, 'text-gray-700 dark:text-gray-200 text-xl')}
       >
         {children}
       </h2>
