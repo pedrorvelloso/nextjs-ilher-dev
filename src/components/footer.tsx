@@ -9,7 +9,7 @@ import { socials } from '@/utils/socials'
 function Footer() {
   return (
     <Section className="text-gray-800 dark:text-gray-400">
-      <H1 className="text-center lg:text-left">Get in Touch 💙</H1>
+      <H1 className="text-center lg:text-left">Get in Touch</H1>
       <div className="flex items-center justify-between flex-col gap-y-6 lg:flex-row">
         <div className="flex items-center gap-x-6">
           <Avatar src="/imgs/avatar.jpeg" alt="Pedro Reis" size="xs" />
