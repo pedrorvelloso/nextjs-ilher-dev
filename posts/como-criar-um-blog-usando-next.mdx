@@ -20,8 +20,24 @@ yarn create next-app my-blog
 Após o projeto ser iniciado, iremos adicionar as dependências necessárias para nosso projeto:
 
 ```sh
-yarn add next-mdx-remote gray-matter tailwindcss@latest postcss@latest autoprefixer@latest -D
+yarn add tailwindcss@latest postcss@latest autoprefixer@latest -D
+
+yarn add next-mdx-remote gray-matter
 ```
+
+## Rodando o projeto
+
+Para acompanhar o desenvolvimento, podemos rodar nosso servidor de desenvolvimento com o seguinte comando:
+
+```sh
+yarn dev
+```
+
+A aplicação ficara disponível no link [http://localhost:3000](http://localhost:300).
+
+## Disclaimer
+
+Por mais que algumas pessoas abracem sempre o mais simples, creio que seja importante fazer coisas do jeito que gostamos. É possível fazer um blog simples como este usando apenas HTML e CSS, mas se você gosta de React, e é algo que você quer aprender mais, porquê não fazer?
 
 ## O que é MDX?
 MDX é um formato que nos deixa importar códigos JSX dentro de nosso arquivo *Markdown*. Com isso, escrever contéudos fica mais fácil, além de ser possível utilizar componentes específicos do React para melhorar ainda mais a visualização. Além disso, não precisaremos de nenhum tipo de gerenciador de contéudo, apenas um lugar para servir nossa aplicação. **Todo** conteúdo ficara junto do nosso código fonte.

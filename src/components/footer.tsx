@@ -18,7 +18,7 @@ function Footer() {
             <Paragraph>Full stack developer</Paragraph>
           </div>
         </div>
-        <div className="flex gap-3 flex-wrap">
+        <div className="flex gap-3 flex-wrap justify-center">
           {socials.map((social) => (
             <SocialLinkCard
               key={social.title}
