@@ -23,7 +23,7 @@ const components = {
     const language = props.className.replace(/language-/, '')
     return (
       <Code language={language} contrast {...props} className="mb-3">
-        {props.children.substring(0, props.children.length - 1)}
+        {props.children.trim()}
       </Code>
     )
   },

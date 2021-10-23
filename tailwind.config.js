@@ -18,6 +18,7 @@ module.exports = {
         southsystem: '#ff5100',
         'twitter-opacity': 'rgba(29, 161, 242, 0.08)',
         twitter: 'rgba(29, 161, 242, 1)',
+        'github-opacity-light': 'rgba(51, 51, 51, 0.2)',
         'github-opacity': 'rgba(51, 51, 51, 0.4)',
         github: 'rgba(51, 51, 51, 3)',
         'instagram-opacity': 'rgba(193, 53, 132, 0.1)',
