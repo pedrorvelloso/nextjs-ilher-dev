@@ -37,6 +37,16 @@ function SEO({ pageTitle, meta: META }: SeoProps) {
         content={meta.twitter.handle}
         key="twhandle"
       />
+      <meta
+        name="twitter:title"
+        content={`${pageTitle} - ilher.dev`}
+        key="twtitle"
+      />
+      <meta
+        property="twitter:description"
+        content={meta.description}
+        key="twdesc"
+      />
 
       {/* Open Graph */}
       <meta property="og:site_name" content={meta.siteName} key="ogsitename" />
@@ -46,6 +56,14 @@ function SEO({ pageTitle, meta: META }: SeoProps) {
         key="ogtitle"
       />
       <meta property="og:description" content={meta.description} key="ogdesc" />
+
+      {/* Image */}
+      {meta.image && (
+        <>
+          <meta property="og:image" content={meta.image} key="ogimg" />
+          <meta name="twitter:image" content={meta.image} key="twimg" />
+        </>
+      )}
     </Head>
   )
 }

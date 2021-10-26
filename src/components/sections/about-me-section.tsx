@@ -32,7 +32,7 @@ function AboutMeSection() {
             want to follow me make sure to click{' '}
             <Anchor
               href="https://twitch.tv/ilher"
-              className="text-gray-600 dark:text-gray-400"
+              className="text-gray-600 dark:text-gray-200"
             >
               this link
             </Anchor>{' '}
@@ -43,7 +43,7 @@ function AboutMeSection() {
             inbox is always open.{' '}
             <Anchor
               href="mailto:pedro@ilher.dev"
-              className="text-gray-600 dark:text-gray-400"
+              className="text-gray-600 dark:text-gray-200"
             >
               Click here
             </Anchor>{' '}

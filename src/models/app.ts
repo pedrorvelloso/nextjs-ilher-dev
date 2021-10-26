@@ -8,4 +8,5 @@ export interface MetaTags {
   }
   siteName?: string
   description?: string
+  image?: string
 }

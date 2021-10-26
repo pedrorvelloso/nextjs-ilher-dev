@@ -6,7 +6,7 @@ import { serialize } from 'next-mdx-remote/serialize'
 
 import { Post } from '@/models/blog'
 
-export const POSTS_PATH = path.join(process.cwd(), 'posts')
+export const POSTS_PATH = path.join(process.cwd(), 'content/posts')
 
 export const postFilePaths = fs
   .readdirSync(POSTS_PATH)

@@ -6,6 +6,7 @@ import { ThemeProvider } from 'next-themes'
 
 import Navbar from '@/components/navbar'
 import SEO from '@/components/seo'
+import Footer from '@/components/footer'
 
 const THEME_STORAGE = '@ilher/theme'
 
@@ -22,6 +23,8 @@ function MyApp({ Component, pageProps }) {
       <div className="min-h-screen">
         <Navbar />
         <Component {...pageProps} />
+
+        <Footer />
       </div>
     </ThemeProvider>
   )

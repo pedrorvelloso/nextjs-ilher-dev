@@ -17,7 +17,6 @@ import SEO from '@/components/seo'
 import NavigationButton from '@/components/navigation-button'
 import Section from '@/components/section'
 import GithubCard from '@/components/github-card'
-import Footer from '@/components/footer'
 
 const PostAnchor = (props: AnchorProps) => (
   <div className="relative group">
@@ -70,7 +69,10 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
     <>
       <SEO
         pageTitle={frontMatter.title}
-        meta={{ description: frontMatter.description }}
+        meta={{
+          description: frontMatter.description,
+          image: frontMatter.bannerUrl,
+        }}
       />
       <Section as="div" className="flex">
         <NavigationButton href="/blog" direction="backward">
@@ -97,10 +99,9 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
             {frontMatter.language}
           </Paragraph>
         </div>
-        <article className="post mb-24 lg:mb-36">
+        <article className="post">
           <MDXRemote {...source} components={components} />
         </article>
-        <Footer />
       </section>
     </>
   )

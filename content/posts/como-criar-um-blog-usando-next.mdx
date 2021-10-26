@@ -466,6 +466,12 @@ E agora temos um componente de contador em nosso MDX!
 
 ![Aplicação com contador](https://res.cloudinary.com/ilher-dev/image/upload/v1634927639/blog_m4yvkx.gif)
 
+## Ressalvas
+
+- O `next-mdx-remote` é pra casos de uso mais simples. Se você precisar importar diversos componentes diferentes em diferentes páginas/posts, eu aconselho a dar uma olhada no [mdx-bundler](https://github.com/kentcdodds/mdx-bundler) (provavelmente num futuro próximo irei migrar meu blog para ele).
+- Outro ponto é que como criamos os posts em *build time* a têndencia é que esse processo começe a demorar quanto mais posts você tem. Você pode experimentar algum CMS *Headless* ou implementar com o *approach* de [Server Side Rendering](https://nextjs.org/docs/basic-features/pages#server-side-rendering) ao invés de SSG (Static Site Generation). A dica minha é: vá com calma, um passo de cada vez na aprendizagem!
+
+
 ## Finalizando o projeto
 
 Agora com o projeto finalizado, você pode fazer o *deploy* na Vercel, do mesmo jeito que esse meu blog é! Caso queiram conferir o código fonte do projeto final basta acessar o repositório:
