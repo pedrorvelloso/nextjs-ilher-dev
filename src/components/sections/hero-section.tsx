@@ -18,6 +18,7 @@ function HeroSection() {
       <Avatar
         src="/imgs/avatar.jpeg"
         alt="Pedro Reis"
+        className="opacity-0 mb-4"
         initial={{ scale: 1.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.75 }}
@@ -38,7 +39,7 @@ function HeroSection() {
         </H1>
         <motion.p
           variants={childVariants}
-          className="text-gray-800 dark:text-gray-400 text-lg lg:text-xl text-center"
+          className="text-gray-800 dark:text-blueGray-500 text-lg lg:text-xl text-center"
         >
           Hey, I’m Pedro Reis. Software developer focused on delivering amazing
           experiences.

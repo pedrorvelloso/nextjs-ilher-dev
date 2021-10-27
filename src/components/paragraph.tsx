@@ -17,7 +17,7 @@ function Paragraph({
     <p
       className={clsx(className, 'text-lg mb-5', {
         'lg:text-xl': bigger,
-        'text-gray-800 dark:text-gray-400': !isDescription,
+        'text-gray-800 dark:text-blueGray-500': !isDescription,
         'text-gray-600': isDescription,
       })}
     >

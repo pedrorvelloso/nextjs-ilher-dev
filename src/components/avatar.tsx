@@ -7,21 +7,23 @@ interface AvatarProps {
   size?: 'xs' | 'sm' | 'lg' | 'responsive'
   src: string
   alt: string
+  className?: string
 }
 
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ src, size = 'responsive', alt }, ref) => {
+  ({ src, size = 'responsive', alt, className }, ref) => {
     return (
       <div
         ref={ref}
         className={clsx(
-          'bg-gray-800 dark:bg-gray-200 rounded-full flex justify-center items-center mb-4 relative',
+          'bg-gray-800 dark:bg-gray-200 rounded-full flex justify-center items-center relative overflow-hidden',
           {
             'avatar-sm lg:avatar-lg p-[2px] lg:p-1': size === 'responsive',
             'avatar-sm p-[2px]': size === 'sm',
             'avatar-lg p-1': size === 'lg',
             'avatar-xs p-[2px]': size === 'xs',
           },
+          className,
         )}
       >
         <Image

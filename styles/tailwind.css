@@ -44,7 +44,7 @@
 
   /* POST */
   .post {
-    @apply w-full text-gray-800 dark:text-gray-400
+    @apply w-full text-gray-800 dark:text-blueGray-500
   }
 
   .post > *:not(pre) {

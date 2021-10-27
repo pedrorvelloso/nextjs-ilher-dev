@@ -13,6 +13,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        blueGray: {
+          500: 'var(--color-blueGray-500)',
+        },
         code: 'var(--color-dark-blue)',
         'color-section': '#2ca9d4',
         southsystem: '#ff5100',

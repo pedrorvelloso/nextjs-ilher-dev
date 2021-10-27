@@ -32,7 +32,7 @@ function PostPreview({ image, title, description, url }: PostPreviewProps) {
           blurDataURL={image.blurImage}
         />
       </div>
-      <div className="text-gray-600 dark:text-gray-400 mt-4 text-xl">
+      <div className="text-gray-600 dark:text-blueGray-500 mt-4 text-xl">
         {description}
       </div>
       <div className="text-2xl font-medium md:text-3xl text-gray-800 dark:text-white ">

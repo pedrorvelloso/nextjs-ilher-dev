@@ -10,9 +10,13 @@ class MyDocument extends Document {
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: `<style>[style*='opacity:0'] {
-            opacity: unset !important;
-            transform: unset !important;
-          }</style>`,
+              opacity: unset !important;
+              transform: unset !important;
+            }
+            .avatar-sm,.avatar-lg {
+              opacity: unset !important;
+            }
+            </style>`,
             }}
           />
           <link

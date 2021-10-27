@@ -15,19 +15,19 @@ function Footer() {
       as="footer"
     >
       <H1 className="text-center lg:text-left">Get in Touch</H1>
-      <div className="flex items-center justify-between flex-col gap-y-6 lg:flex-row">
+      <div className="flex items-center justify-between flex-col gap-y-9 md:flex-row">
         <div className="flex items-center gap-x-6">
           <Avatar src="/imgs/avatar.jpeg" alt="Pedro Reis" size="xs" />
           <div>
             <H2>
               <Anchor
                 href="mailto:pedro@ilher.dev"
-                className="flex items-center gap-4"
+                className="flex items-center gap-3"
               >
-                Pedro Reis <FaEnvelope />
+                Pedro Reis <FaEnvelope className="text-lg" />
               </Anchor>
             </H2>
-            <Paragraph>Full stack developer</Paragraph>
+            <Paragraph className="mb-0">Full stack developer</Paragraph>
           </div>
         </div>
         <div className="flex gap-3 flex-wrap justify-center">

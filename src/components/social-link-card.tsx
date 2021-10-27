@@ -42,14 +42,13 @@ function SocialLinkCard({
         'flex flex-col items-center justify-between group rounded-lg transition-colors duration-200',
         'hover:scale-110 transition-transform hover:shadow-md',
         {
-          'w-auto lg:w-36 h-auto lg:h-36 p-8': !asFootnote,
+          'w-auto h-auto lg:w-36 lg:h-36 p-8': !asFootnote,
           'p-4': asFootnote,
         },
       )}
       underline={false}
     >
       <Icon
-        size={asFootnote ? 24 : 38}
         className={clsx('transition-colors', {
           'text-twitter group-hover:text-white': social === 'twitter',
           'text-gray-700 dark:text-gray-500 group-hover:text-white':
@@ -58,6 +57,8 @@ function SocialLinkCard({
           'text-linkedin group-hover:text-white': social === 'linkedin',
           'text-twitch group-hover:text-white': social === 'twitch',
           'text-gray-800 group-hover:text-gray-200': social === 'email',
+          'text-lg lg:text-2xl': asFootnote,
+          'text-[32px]': !asFootnote,
         })}
       />
       {!asFootnote && <p className="mt-5 text-lg font-bold">{title}</p>}
