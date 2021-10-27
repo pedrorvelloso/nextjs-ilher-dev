@@ -60,16 +60,8 @@ function SEO({ pageTitle, meta: META }: SeoProps) {
       {/* Image */}
       {meta.image && (
         <>
-          <meta
-            property="og:image"
-            content={`${meta.image}.webp`}
-            key="ogimg"
-          />
-          <meta
-            name="twitter:image"
-            content={`${meta.image}.webp`}
-            key="twimg"
-          />
+          <meta property="og:image" content={meta.image} key="ogimg" />
+          <meta name="twitter:image" content={meta.image} key="twimg" />
         </>
       )}
     </Head>
