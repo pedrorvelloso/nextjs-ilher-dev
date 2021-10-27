@@ -17,6 +17,7 @@ import SEO from '@/components/seo'
 import NavigationButton from '@/components/navigation-button'
 import Section from '@/components/section'
 import GithubCard from '@/components/github-card'
+import { imageProps } from '@/utils/imageBuilder'
 
 const PostAnchor = (props: AnchorProps) => (
   <div className="relative group">
@@ -71,7 +72,7 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
         pageTitle={frontMatter.title}
         meta={{
           description: frontMatter.description,
-          image: frontMatter.bannerUrl,
+          image: imageProps({ id: frontMatter.bannerId }).src,
         }}
       />
       <Section as="div" className="flex">
@@ -84,12 +85,16 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
           <H1>{frontMatter.title}</H1>
           <div className="relative overflow-hidden aspect-h-4 aspect-w-3 md:aspect-w-16 md:aspect-h-8 mx-auto mb-4 rounded-lg">
             <Image
-              alt={frontMatter.bannerCredit}
-              src={frontMatter.bannerUrl}
+              {...imageProps({
+                id: frontMatter.bannerId,
+                transformations: { resize: { width: 1600 } },
+              })}
+              alt={frontMatter.bannerAlt}
               title={frontMatter.bannerCredit}
-              layout="fill"
               objectFit="cover"
               objectPosition="center"
+              placeholder="blur"
+              blurDataURL={frontMatter.blurImage}
             />
           </div>
           <H2>{frontMatter.description}</H2>
