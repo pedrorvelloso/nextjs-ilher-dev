@@ -1,11 +1,13 @@
 import Image from 'next/image'
+import { imageProps } from '@/utils/imageBuilder'
 import Anchor from './anchor'
 
 interface PostPreviewProps {
   image: {
-    url: string
+    id: string
     alt: string
     credit: string
+    blurImage: string
   }
   title: string
   description: string
@@ -17,12 +19,17 @@ function PostPreview({ image, title, description, url }: PostPreviewProps) {
     <Anchor href={`/blog${url}`} underline={false} className="group relative">
       <div className="relative w-full h-80 transition-all rounded-lg overflow-hidden group-hover:opacity-50 group-hover:-translate-y-2 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-3 lg:aspect-h-4">
         <Image
+          {...imageProps({
+            id: image.id,
+            transformations: { resize: { height: 600 } },
+          })}
           alt={image.alt}
           title={image.credit}
-          src={image.url}
           layout="fill"
           objectFit="cover"
           objectPosition="center"
+          placeholder="blur"
+          blurDataURL={image.blurImage}
         />
       </div>
       <div className="text-gray-600 dark:text-gray-400 mt-4 text-xl">

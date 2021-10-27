@@ -1,7 +1,8 @@
 export interface Post {
   bannerCredit: string
   bannerAlt: string
-  bannerUrl: string
+  bannerId: string
+  blurImage: string
   date: string
   description: string
   language: string

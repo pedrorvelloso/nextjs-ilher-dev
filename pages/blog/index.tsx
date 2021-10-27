@@ -30,9 +30,10 @@ export default function BlogPage({
             title={post.title}
             url={post.url}
             image={{
-              url: post.bannerUrl,
+              id: post.bannerId,
               alt: post.bannerCredit,
               credit: post.bannerCredit,
+              blurImage: post.blurImage,
             }}
           />
         ))}

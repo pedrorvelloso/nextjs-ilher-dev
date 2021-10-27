@@ -27,9 +27,10 @@ function BlogSection({ posts }: BlogSectionProps) {
             title={post.title}
             description={`${formatDate(post.date)} - ${post.readTime}`}
             image={{
-              url: post.bannerUrl,
+              id: post.bannerId,
               alt: post.bannerCredit,
               credit: post.bannerCredit,
+              blurImage: post.blurImage,
             }}
           />
         ))}

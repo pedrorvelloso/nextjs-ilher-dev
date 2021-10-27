@@ -3,6 +3,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import readingTime from 'reading-time'
 import { serialize } from 'next-mdx-remote/serialize'
+import { buildUrl } from 'cloudinary-build-url'
 
 import { Post } from '@/models/blog'
 
@@ -26,6 +27,12 @@ export async function getPost(slug: string) {
     scope: data,
   })
 
+  try {
+    data.blurImage = await getBlurDataUrl(data.bannerId)
+  } catch (e) {
+    console.error('error getting blur image', e)
+  }
+
   return {
     source: mdxSource,
     frontMatter: { ...data, readTime: readingTime(content).text },
@@ -40,6 +47,7 @@ export async function getLatestPosts() {
     const source = fs.readFileSync(postsFilePath)
     const { content, data } = matter(source)
     const post = data as Post
+
     return {
       ...post,
       url: `/${file.replace('.mdx', '')}`,
@@ -51,5 +59,44 @@ export async function getLatestPosts() {
     return +new Date(postB.date) - +new Date(postA.date)
   })
 
-  return loadedPosts
+  const posts = Promise.all(
+    loadedPosts.map(async (post) => {
+      const withBlur = post
+      const blurredImage = await getBlurDataUrl(post.bannerId)
+      withBlur.blurImage = blurredImage
+
+      return withBlur
+    }),
+  )
+
+  return posts
+}
+
+// https://github.com/kentcdodds/kentcdodds.com/blob/main/app/utils/mdx.tsx#L253
+async function getDataUrlForImage(imageUrl: string) {
+  const res = await fetch(imageUrl)
+  const arrayBuffer = await res.arrayBuffer()
+  const base64 = Buffer.from(arrayBuffer).toString('base64')
+  const mime = res.headers.get('Content-Type') ?? 'image/webp'
+  const dataUrl = `data:${mime};base64,${base64}`
+  return dataUrl
+}
+
+async function getBlurDataUrl(cloudinaryId: string) {
+  const imageURL = buildUrl(cloudinaryId, {
+    cloud: {
+      cloudName: 'ilher-dev',
+    },
+    transformations: {
+      resize: { width: 100 },
+      quality: 'auto',
+      format: 'webp',
+      effect: {
+        name: 'blur',
+        value: '1000',
+      },
+    },
+  })
+  const dataUrl = await getDataUrlForImage(imageURL)
+  return dataUrl
 }
