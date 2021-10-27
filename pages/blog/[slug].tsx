@@ -72,7 +72,10 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
         pageTitle={frontMatter.title}
         meta={{
           description: frontMatter.description,
-          image: imageProps({ id: frontMatter.bannerId }).src,
+          image: imageProps({
+            id: frontMatter.bannerId,
+            transformations: { resize: { width: 1000 } },
+          }).src,
         }}
       />
       <Section as="div" className="flex">

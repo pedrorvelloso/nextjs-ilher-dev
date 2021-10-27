@@ -20,8 +20,7 @@ export function imageProps({
   quality = 100,
 }: ImagePropsOptions) {
   const cloudinaryImage = buildUrl(id, {
-    transformations: { format: 'webp' },
-    ...transformations,
+    transformations: { format: 'webp', ...transformations },
   })
 
   return { src: cloudinaryImage, layout, quality }
