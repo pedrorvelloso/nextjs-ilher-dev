@@ -20,11 +20,11 @@ class MyDocument extends Document {
             }}
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=optional"
             rel="stylesheet"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=optional"
             rel="stylesheet"
           />
         </Head>
