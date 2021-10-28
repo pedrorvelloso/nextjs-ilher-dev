@@ -20,11 +20,16 @@ class MyDocument extends Document {
             }}
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=optional"
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
             rel="stylesheet"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=optional"
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
             rel="stylesheet"
           />
         </Head>
