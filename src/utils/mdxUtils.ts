@@ -1,9 +1,12 @@
+/* eslint-disable no-param-reassign */
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
+import { bundleMDX } from 'mdx-bundler'
+
 import readingTime from 'reading-time'
-import { serialize } from 'next-mdx-remote/serialize'
 import { buildUrl } from 'cloudinary-build-url'
+
+import rehypeMetaAttrs from '@/lib/rehype-meta-attribute'
 
 import { Post } from '@/models/blog'
 
@@ -13,63 +16,60 @@ export const postFilePaths = fs
   .readdirSync(POSTS_PATH)
   .filter((p) => /\.mdx?$/.test(p))
 
-export async function getPost(slug: string) {
-  const postsFilePath = path.join(POSTS_PATH, `${slug}.mdx`)
-  const source = fs.readFileSync(postsFilePath)
+const compileMdx = async (file: string) => {
+  const openFile = fs.readFileSync(file).toString()
+  const result = await bundleMDX(openFile, {
+    xdmOptions(options) {
+      // eslint-disable-next-line no-param-reassign
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        rehypeMetaAttrs,
+      ]
 
-  const { content, data } = matter(source)
-
-  const mdxSource = await serialize(content, {
-    mdxOptions: {
-      remarkPlugins: [],
-      rehypePlugins: [],
+      return options
     },
-    scope: data,
   })
 
-  try {
-    data.blurImage = await getBlurDataUrl(data.bannerId)
-  } catch (e) {
-    console.error('error getting blur image', e)
-  }
+  const readTime = readingTime(openFile).text
+
+  return { ...result, readTime }
+}
+
+export async function getPost(slug: string) {
+  const postsFilePath = path.join(POSTS_PATH, `${slug}.mdx`)
+  const { code, frontmatter, readTime } = await compileMdx(postsFilePath)
+  frontmatter.blurImage = await getBlurDataUrl(frontmatter.bannerId)
 
   return {
-    source: mdxSource,
-    frontMatter: { ...data, readTime: readingTime(content).text },
+    source: code,
+    frontMatter: { ...frontmatter, readTime },
   }
 }
 
 export async function getLatestPosts() {
   const unLoadedPosts = postFilePaths
 
-  const loadedPosts = unLoadedPosts.map((file) => {
-    const postsFilePath = path.join(POSTS_PATH, file)
-    const source = fs.readFileSync(postsFilePath)
-    const { content, data } = matter(source)
-    const post = data as Post
+  const loadedPosts = await Promise.all(
+    unLoadedPosts.map(async (file) => {
+      const postsFilePath = path.join(POSTS_PATH, file)
+      const { frontmatter, readTime } = await compileMdx(postsFilePath)
+      frontmatter.blurImage = await getBlurDataUrl(frontmatter.bannerId)
 
-    return {
-      ...post,
-      url: `/${file.replace('.mdx', '')}`,
-      readTime: readingTime(content).text,
-    }
-  })
+      const post = frontmatter as Post
+
+      return {
+        ...post,
+        url: `/${file.replace('.mdx', '')}`,
+        readTime,
+      }
+    }),
+  )
 
   loadedPosts.sort((postA, postB) => {
     return +new Date(postB.date) - +new Date(postA.date)
   })
 
-  const posts = Promise.all(
-    loadedPosts.map(async (post) => {
-      const withBlur = post
-      const blurredImage = await getBlurDataUrl(post.bannerId)
-      withBlur.blurImage = blurredImage
-
-      return withBlur
-    }),
-  )
-
-  return posts
+  return loadedPosts
 }
 
 // https://github.com/kentcdodds/kentcdodds.com/blob/main/app/utils/mdx.tsx#L253
@@ -97,6 +97,14 @@ async function getBlurDataUrl(cloudinaryId: string) {
       },
     },
   })
-  const dataUrl = await getDataUrlForImage(imageURL)
+
+  let dataUrl: string
+
+  try {
+    dataUrl = await getDataUrlForImage(imageURL)
+  } catch (e) {
+    console.error('error getting blur image', e)
+  }
+
   return dataUrl
 }
