@@ -1,6 +1,7 @@
 import Image from 'next/image'
+import { useMemo } from 'react'
 
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { getMDXComponent } from 'mdx-bundler/client'
 import slugify from 'slugify'
 import { FaLink } from 'react-icons/fa'
 
@@ -30,11 +31,13 @@ const PostAnchor = (props: AnchorProps) => (
 
 const components = {
   code: (props) => {
-    const language = props.className.replace(/language-/, '')
-    return (
-      <Code language={language} contrast {...props} className="mb-3">
+    const match = /language-(\w+)/.exec(props.className || '')
+    return match ? (
+      <Code language={match[1]} contrast {...props} className="mb-3">
         {props.children.trim()}
       </Code>
+    ) : (
+      <code {...props} />
     )
   },
   h1: (props) => (
@@ -61,11 +64,13 @@ const components = {
 }
 
 interface BlogPostInterface {
-  source: MDXRemoteSerializeResult
+  source: string
   frontMatter: Post
 }
 
 export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
+  const Component = useMemo(() => getMDXComponent(source), [source])
+
   return (
     <>
       <SEO
@@ -98,6 +103,7 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
               objectPosition="center"
               placeholder="blur"
               blurDataURL={frontMatter.blurImage}
+              priority
             />
           </div>
           <H2>{frontMatter.description}</H2>
@@ -108,7 +114,7 @@ export default function BlogPost({ source, frontMatter }: BlogPostInterface) {
           </Paragraph>
         </div>
         <article className="post">
-          <MDXRemote {...source} components={components} />
+          <Component components={components} />
         </article>
       </section>
     </>
